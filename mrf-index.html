@@ -58,20 +58,12 @@
     }
 
     .nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.15em;
+      color: var(--white);
     }
-    .nav-logo img {
-      height: 64px;
-      width: auto;
-      object-fit: contain;
-      border-radius: 50%;
-      padding: 6px;
-      background: radial-gradient(circle, rgba(255,255,255,0.92) 40%, rgba(255,255,255,0.4) 70%, transparent 100%);
-      -webkit-mask-image: radial-gradient(circle, black 40%, transparent 75%);
-      mask-image: radial-gradient(circle, black 40%, transparent 75%);
-    }
+    .nav-logo span { color: var(--gold); }
 
     .nav-links {
       display: flex;
@@ -947,7 +939,7 @@
 
 <!-- ─── NAV ─── -->
 <nav>
-  <a href="#hero" class="nav-logo"><img src="mrf-logo-transparent.png" alt="MRF Fitness Logo"></a>
+  <div class="nav-logo">MR<span>F</span></div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
@@ -981,10 +973,7 @@
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span class="scroll-text">Scroll</span>
-  </div>
+
 </section>
 
 <!-- ─── ABOUT ─── -->
