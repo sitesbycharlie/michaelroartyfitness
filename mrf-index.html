@@ -58,12 +58,15 @@
     }
 
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: 0.15em;
-      color: var(--white);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
     }
-    .nav-logo span { color: var(--gold); }
+    .nav-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
 
     .nav-links {
       display: flex;
@@ -939,7 +942,7 @@
 
 <!-- ─── NAV ─── -->
 <nav>
-  <div class="nav-logo">MR<span>F</span></div>
+  <a href="#hero" class="nav-logo"><img src="mrf-logo-transparent.png" alt="MRF Fitness Logo"></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
