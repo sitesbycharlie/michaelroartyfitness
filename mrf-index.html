@@ -141,7 +141,35 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 700px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .hero-photo-wrap .img-placeholder {
+      width: 100%;
+      max-width: 420px;
+      height: 520px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: none; }
     }
 
     .hero-eyebrow {
@@ -1036,17 +1064,18 @@
       gap: 1rem;
     }
     .social-btn {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(245,245,240,0.1);
+      width: 52px; height: 52px;
+      border: 1px solid rgba(245,245,240,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-muted);
-      font-size: 0.8rem;
+      font-size: 1rem;
       text-decoration: none;
       transition: all 0.2s;
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
+      letter-spacing: 0.05em;
     }
     .social-btn:hover { border-color: var(--gold); color: var(--gold); }
 
@@ -1111,22 +1140,27 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">Personal Training & Coaching</div>
-    <h1 class="hero-title">
-      BUILD<br>
-      <span class="line2">YOUR BEST</span><br>
-      <span class="line3">BODY.</span>
-    </h1>
-    <p class="hero-sub">
-      Expert 1-2-1 coaching, nutrition, and transformation programmes designed around <em>you</em>.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Book a Free Consultation</a>
-      <a href="#contact" class="btn-secondary">
-        <span class="arrow">↓</span>
-        Get Started
-      </a>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Personal Training & Coaching</div>
+      <h1 class="hero-title">
+        BUILD<br>
+        <span class="line2">YOUR BEST</span><br>
+        <span class="line3">BODY.</span>
+      </h1>
+      <p class="hero-sub">
+        Expert 1-2-1 coaching, nutrition, and transformation programmes designed around <em>you</em>.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <div class="img-placeholder" style="width:100%;max-width:420px;height:520px;border-radius:4px;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>Michael's Photo</span>
+      </div>
     </div>
   </div>
 
@@ -1199,7 +1233,6 @@
       <div class="service-icon">🏋️</div>
       <div class="service-name">1-2-1 Personal Training</div>
       <p class="service-desc">Fully coached sessions in the gym with Michael by your side. Every rep, every set — guided with purpose. Perfect for beginners or those who want elite-level accountability.</p>
-      <a href="#contact" class="service-link">Enquire Now →</a>
     </div>
 
     <div class="service-card">
@@ -1207,7 +1240,6 @@
       <div class="service-icon">📱</div>
       <div class="service-name">Online Coaching</div>
       <p class="service-desc">Full programming, nutrition, and weekly check-ins — wherever you are in the world. Our most popular programme. Train on your schedule without sacrificing results.</p>
-      <a href="#contact" class="service-link">Most Popular →</a>
     </div>
 
     <div class="service-card">
@@ -1215,7 +1247,6 @@
       <div class="service-icon">🥗</div>
       <div class="service-name">Nutrition Coaching</div>
       <p class="service-desc">No crash diets. No misery. A personalised nutrition strategy that fits your lifestyle and fuels your body to perform and transform. Macro planning, meal prep guidance, and mindset support.</p>
-      <a href="#contact" class="service-link">Enquire Now →</a>
     </div>
 
     <div class="service-card">
@@ -1223,7 +1254,6 @@
       <div class="service-icon">🔥</div>
       <div class="service-name">Fat Loss Programme</div>
       <p class="service-desc">A targeted, sustainable approach to dropping body fat while protecting your hard-earned muscle. Built around your body composition and lifestyle — not a cookie-cutter cut.</p>
-      <a href="#contact" class="service-link">Enquire Now →</a>
     </div>
 
     <div class="service-card">
@@ -1231,15 +1261,13 @@
       <div class="service-icon">💪</div>
       <div class="service-name">Muscle Building</div>
       <p class="service-desc">Structured hypertrophy training and nutrition protocols to pack on quality size. Whether it's your first bulk or a plateau-busting phase, Michael has you covered with science-backed methods.</p>
-      <a href="#contact" class="service-link">Enquire Now →</a>
     </div>
 
     <div class="service-card">
       <div class="service-num">06</div>
-      <div class="service-icon">🏆</div>
-      <div class="service-name">Competition Prep</div>
-      <p class="service-desc">Stage-ready physique development for bodybuilding and fitness competitors. Peak week protocols, posing, and full-spectrum coaching from off-season to show day.</p>
-      <a href="#contact" class="service-link">Enquire Now →</a>
+      <div class="service-icon">🤝</div>
+      <div class="service-name">2-1 Coaching</div>
+      <p class="service-desc">Train with a friend and commit together. Same fully personalised approach — programming, nutrition, and coaching — shared between two people. Ideal for pairs who want to push each other, stay accountable, and make the journey more enjoyable from day one.</p>
     </div>
 
   </div>
@@ -1422,7 +1450,7 @@
             <option>Nutrition Coaching</option>
             <option>Fat Loss Programme</option>
             <option>Muscle Building</option>
-            <option>Competition Prep</option>
+            <option>2-1 Coaching</option>
             <option>Not sure — need advice</option>
           </select>
         </div>
@@ -1468,7 +1496,7 @@
   <div class="footer-logo"><img src="mrf-logo-transparent.png" alt="MRF Fitness Logo" style="height:56px;width:auto;object-fit:contain;border-radius:50%;padding:5px;background:radial-gradient(circle, rgba(255,255,255,0.92) 40%, rgba(255,255,255,0.4) 70%, transparent 100%);-webkit-mask-image:radial-gradient(circle, black 40%, transparent 75%);mask-image:radial-gradient(circle, black 40%, transparent 75%);"></div>
   <p class="footer-copy">© 2026 Michael Roarty Fitness. All rights reserved.</p>
   <div class="footer-socials">
-    <a href="#" class="social-btn">IG</a>
+    <a href="https://www.instagram.com/michaelroartyfitness/" target="_blank" class="social-btn">IG</a>
   </div>
 </footer>
 
