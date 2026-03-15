@@ -75,7 +75,7 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       list-style: none;
     }
     .nav-links a {
@@ -605,60 +605,204 @@
     }
     .results-header .section-title span { color: var(--gold); }
 
-    .results-marquee-wrap {
+    /* Square looping carousel */
+    .ba-carousel-wrap {
+      position: relative;
       overflow: hidden;
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
+      cursor: pointer;
     }
-    .results-marquee {
+    .ba-carousel-wrap.paused .ba-carousel-track { animation-play-state: paused; }
+    .ba-carousel-track {
       display: flex;
-      gap: 1.5rem;
-      animation: marquee 25s linear infinite;
+      gap: 1.2rem;
       width: max-content;
+      animation: baScroll 32s linear infinite;
     }
-    .result-card {
-      width: 280px;
-      background: var(--mid);
+    @keyframes baScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ba-card {
+      width: 320px;
+      height: 320px;
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
-    .result-card-img {
+    .ba-card:hover .ba-card-overlay { opacity: 1; }
+    .ba-card:hover .ba-card-inner { transform: scale(1.03); }
+    .ba-card-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       width: 100%;
-      height: 320px;
-      object-fit: cover;
+      height: 100%;
+      transition: transform 0.35s ease;
     }
-    .result-card-info {
-      padding: 1.2rem;
+    .ba-card-half {
+      position: relative;
+      overflow: hidden;
     }
-    .result-name {
+    .ba-card-half .img-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      font-size: 0.6rem;
+    }
+    .ba-card-half-label {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1rem;
+      font-size: 0.6rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.15em;
       color: var(--white);
+      background: rgba(0,0,0,0.65);
+      padding: 0.15rem 0.45rem;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
-    .result-stat {
+    .ba-card-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: var(--gold);
+      z-index: 2;
+    }
+    .ba-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 3;
+      gap: 0.3rem;
+    }
+    .ba-card-overlay-stat,
+    .ba-card-overlay-tag,
+    .ba-card-overlay-icon { display: none; }
+
+    .ba-card-overlay-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: 0.08em;
+    }
+    .ba-card-overlay-stat {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .ba-card-overlay-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+    }
+    .ba-card-overlay-icon {
+      margin-top: 0.4rem;
+      font-size: 1.1rem;
+      color: var(--white);
+      opacity: 0.8;
+    }
+
+    /* Lightbox */
+    .ba-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .ba-lightbox.active { display: flex; }
+    .ba-lightbox-inner {
+      position: relative;
+      max-width: 860px;
+      width: 100%;
+    }
+    .ba-lightbox-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .ba-lightbox-half {
+      position: relative;
+    }
+    .ba-lightbox-half .img-placeholder {
+      width: 100%;
+      height: 460px;
+      border-radius: 0;
+    }
+    .ba-lightbox-half-label {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      background: rgba(0,0,0,0.7);
+      padding: 0.3rem 0.8rem;
+      text-transform: uppercase;
+    }
+    .ba-lightbox-info {
+      text-align: center;
+      padding: 1.2rem 0 0;
+    }
+    .ba-lightbox-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem;
-      color: var(--gold);
-      margin: 0.3rem 0 0.2rem;
-    }
-    .result-time {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .result-badge {
-      position: absolute;
-      top: 1rem; right: 1rem;
-      background: var(--gold);
-      color: var(--black);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
+      color: var(--white);
       letter-spacing: 0.1em;
-      padding: 0.3rem 0.7rem;
+    }
+    .ba-lightbox-stat {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .ba-lightbox-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
       text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+    .ba-lightbox-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.8rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .ba-lightbox-close:hover { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .ba-card { width: 220px; height: 220px; }
+      .ba-lightbox-half .img-placeholder { height: 220px; }
     }
 
     .testimonials {
@@ -688,6 +832,9 @@
       margin-bottom: 1.5rem;
       font-style: italic;
     }
+    .testimonial-stars,
+    .testimonial-detail { display: none; }
+
     .testimonial-author {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.85rem;
@@ -867,11 +1014,12 @@
     /* ─── FOOTER ─── */
     footer {
       background: var(--dark);
-      padding: 3rem 5%;
+      padding: 2.5rem 5%;
       border-top: 1px solid rgba(201,168,76,0.1);
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
+      gap: 1rem;
     }
     .footer-logo {
       font-family: 'Bebas Neue', sans-serif;
@@ -992,17 +1140,21 @@
       <div class="section-label">About Michael</div>
       <h2 class="section-title">MORE THAN A<br><span>TRAINER.</span></h2>
       <p class="about-body">
-        I'm Michael Roarty — a certified personal trainer and nutrition coach with over 8 years of experience helping people unlock their potential. My approach is rooted in science, built on consistency, and tailored entirely to you.
+        I'm Michael Roarty — a certified personal trainer and fitness instructor based in Ireland. Before getting into coaching, I lost 30kg myself. That journey changed everything. I fell in love with the gym, with nutrition, and with the structure and routine that comes with committing to a goal. That experience gave me something no qualification could — I know exactly what it takes, because I've lived it.
       </p>
       <p class="about-body">
-        Whether you're looking to lose fat, build lean muscle, or completely transform your lifestyle, I've been exactly where you are. I've done the work. I know the way. And I'll walk it with you every step of the journey.
+        Since then, I've made it my mission to help others do the same. Whether you want to lose fat, build muscle, get stronger, or simply become a healthier version of yourself — for you, or for the people who matter most to you — I'll build a plan around your life and walk every step of the journey with you.
+      </p>
+      <p class="about-body">
+        I offer fully personalised online coaching covering fat loss, muscle building, strength, and gaining phases to help you add size and improve your physique. I also offer in-person 1-1 coaching, or bring a friend for a 2-1 session.
       </p>
       <div class="about-quals">
-        <span class="qual-tag">NASM Certified PT</span>
-        <span class="qual-tag">Nutrition Coach</span>
-        <span class="qual-tag">Strength & Conditioning</span>
+        <span class="qual-tag">Certified Personal Trainer</span>
+        <span class="qual-tag">Certified Fitness Instructor</span>
         <span class="qual-tag">Online Coaching</span>
-        <span class="qual-tag">Competition Prep</span>
+        <span class="qual-tag">Fat Loss Specialist</span>
+        <span class="qual-tag">Strength & Muscle</span>
+        <span class="qual-tag">In-Person & 2-1 Sessions</span>
       </div>
       <a href="#contact" class="btn-primary">Work With Me</a>
     </div>
@@ -1010,14 +1162,12 @@
 
   <!-- Before / After -->
   <div class="before-after-strip reveal">
-    <div class="ba-label">Coach Michael's Own Transformation</div>
     <div class="ba-container">
       <div class="ba-side ba-before img-placeholder" style="height:420px;">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
           <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
         </svg>
         <span>Before Photo</span>
-        <div class="ba-side-label">BEFORE</div>
       </div>
       <div class="ba-divider"></div>
       <div class="ba-side ba-after img-placeholder" style="height:420px;">
@@ -1025,7 +1175,6 @@
           <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
         </svg>
         <span>After Photo</span>
-        <div class="ba-side-label">AFTER</div>
       </div>
     </div>
   </div>
@@ -1103,154 +1252,112 @@
     <h2 class="section-title">REAL PEOPLE.<br><span>REAL RESULTS.</span></h2>
   </div>
 
-  <!-- Scrolling cards -->
-  <div class="results-marquee-wrap">
-    <div class="results-marquee">
-      <!-- Set 1: 6 unique cards -->
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
+  <!-- Looping square before/after carousel -->
+  <div class="ba-carousel-wrap" id="baCarouselWrap">
+    <div class="ba-carousel-track" id="baCarouselTrack">
+
+      <!-- 8 cards — duplicated below for seamless loop -->
+      <div class="ba-card" onclick="openBALightbox(0)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
         </div>
-        <div class="result-badge">Fat Loss</div>
-        <div class="result-card-info">
-          <div class="result-name">Ciara M.</div>
-          <div class="result-stat">-18kg</div>
-          <div class="result-time">16 Week Programme</div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Ciara M.</div><div class="ba-card-overlay-stat">-18kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <div class="ba-card" onclick="openBALightbox(1)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
+        </div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Sean K.</div><div class="ba-card-overlay-stat">+9kg Lean</div><div class="ba-card-overlay-tag">20 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <div class="ba-card" onclick="openBALightbox(2)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
+        </div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Aoife T.</div><div class="ba-card-overlay-stat">-12% BF</div><div class="ba-card-overlay-tag">12 Week Body Recomp</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <div class="ba-card" onclick="openBALightbox(3)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
+        </div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Darren F.</div><div class="ba-card-overlay-stat">Stage Ready</div><div class="ba-card-overlay-tag">24 Week Comp Prep</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <div class="ba-card" onclick="openBALightbox(4)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
+        </div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Emma R.</div><div class="ba-card-overlay-stat">-22kg</div><div class="ba-card-overlay-tag">24 Week Programme</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <div class="ba-card" onclick="openBALightbox(5)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
+        </div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Niamh O.</div><div class="ba-card-overlay-stat">-15kg</div><div class="ba-card-overlay-tag">20 Week Online Coaching</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <div class="ba-card" onclick="openBALightbox(6)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
+        </div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Conor M.</div><div class="ba-card-overlay-stat">-14kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <div class="ba-card" onclick="openBALightbox(7)">
+        <div class="ba-card-inner">
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
+          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
+        </div>
+        <div class="ba-card-divider"></div>
+        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Laura B.</div><div class="ba-card-overlay-stat">+7kg Lean</div><div class="ba-card-overlay-tag">18 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div>
+      </div>
+
+      <!-- Duplicate set for seamless loop -->
+      <div class="ba-card" onclick="openBALightbox(0)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Ciara M.</div><div class="ba-card-overlay-stat">-18kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(1)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Sean K.</div><div class="ba-card-overlay-stat">+9kg Lean</div><div class="ba-card-overlay-tag">20 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(2)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Aoife T.</div><div class="ba-card-overlay-stat">-12% BF</div><div class="ba-card-overlay-tag">12 Week Body Recomp</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(3)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Darren F.</div><div class="ba-card-overlay-stat">Stage Ready</div><div class="ba-card-overlay-tag">24 Week Comp Prep</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(4)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Emma R.</div><div class="ba-card-overlay-stat">-22kg</div><div class="ba-card-overlay-tag">24 Week Programme</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(5)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Niamh O.</div><div class="ba-card-overlay-stat">-15kg</div><div class="ba-card-overlay-tag">20 Week Online Coaching</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(6)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Conor M.</div><div class="ba-card-overlay-stat">-14kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(7)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Laura B.</div><div class="ba-card-overlay-stat">+7kg Lean</div><div class="ba-card-overlay-tag">18 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="ba-lightbox" id="baLightbox">
+    <div class="ba-lightbox-inner">
+      <button class="ba-lightbox-close" onclick="closeBALightbox()">✕</button>
+      <div class="ba-lightbox-split">
+        <div class="ba-lightbox-half">
+          <div class="img-placeholder" style="height:460px;border-radius:0;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="ba-lightbox-half-label">Before</div>
+        </div>
+        <div class="ba-lightbox-half">
+          <div class="img-placeholder" style="height:460px;border-radius:0;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="ba-lightbox-half-label">After</div>
         </div>
       </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Muscle Gain</div>
-        <div class="result-card-info">
-          <div class="result-name">Sean K.</div>
-          <div class="result-stat">+9kg Lean</div>
-          <div class="result-time">20 Week Bulk</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Body Recomp</div>
-        <div class="result-card-info">
-          <div class="result-name">Aoife T.</div>
-          <div class="result-stat">-12% BF</div>
-          <div class="result-time">12 Week Recomp</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Competition</div>
-        <div class="result-card-info">
-          <div class="result-name">Darren F.</div>
-          <div class="result-stat">Stage Ready</div>
-          <div class="result-time">24 Week Prep</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Fat Loss</div>
-        <div class="result-card-info">
-          <div class="result-name">Emma R.</div>
-          <div class="result-stat">-22kg</div>
-          <div class="result-time">24 Week Programme</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Online Coaching</div>
-        <div class="result-card-info">
-          <div class="result-name">Niamh O.</div>
-          <div class="result-stat">-15kg</div>
-          <div class="result-time">20 Week Online</div>
-        </div>
-      </div>
-      <!-- Set 2: exact duplicate for seamless loop -->
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Fat Loss</div>
-        <div class="result-card-info">
-          <div class="result-name">Ciara M.</div>
-          <div class="result-stat">-18kg</div>
-          <div class="result-time">16 Week Programme</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Muscle Gain</div>
-        <div class="result-card-info">
-          <div class="result-name">Sean K.</div>
-          <div class="result-stat">+9kg Lean</div>
-          <div class="result-time">20 Week Bulk</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Body Recomp</div>
-        <div class="result-card-info">
-          <div class="result-name">Aoife T.</div>
-          <div class="result-stat">-12% BF</div>
-          <div class="result-time">12 Week Recomp</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Competition</div>
-        <div class="result-card-info">
-          <div class="result-name">Darren F.</div>
-          <div class="result-stat">Stage Ready</div>
-          <div class="result-time">24 Week Prep</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Fat Loss</div>
-        <div class="result-card-info">
-          <div class="result-name">Emma R.</div>
-          <div class="result-stat">-22kg</div>
-          <div class="result-time">24 Week Programme</div>
-        </div>
-      </div>
-      <div class="result-card">
-        <div class="result-card-img img-placeholder" style="height:320px;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Client Photo</span>
-        </div>
-        <div class="result-badge">Online Coaching</div>
-        <div class="result-card-info">
-          <div class="result-name">Niamh O.</div>
-          <div class="result-stat">-15kg</div>
-          <div class="result-time">20 Week Online</div>
-        </div>
+      <div class="ba-lightbox-info">
+        <div class="ba-lightbox-name" id="baLbName"></div>
       </div>
     </div>
   </div>
@@ -1285,13 +1392,7 @@
       <div class="section-label">Get Started</div>
       <h2 class="section-title">READY TO<br><span>TRANSFORM?</span></h2>
       <p>Fill out the form and Michael will be in touch within 24 hours to discuss your goals, answer your questions, and map out your path forward. No obligation. No pressure. Just results.</p>
-      <div class="contact-benefits">
-        <div class="contact-benefit">Free initial consultation call</div>
-        <div class="contact-benefit">Personalised programme recommendation</div>
-        <div class="contact-benefit">No lock-in contracts</div>
-        <div class="contact-benefit">Results-driven, science-backed approach</div>
-        <div class="contact-benefit">Flexible online & in-person options</div>
-      </div>
+
     </div>
 
     <div class="reveal">
@@ -1356,8 +1457,7 @@
           <textarea placeholder="E.g. I want to lose 15kg for a wedding in June, I've tried dieting before but struggled with consistency..."></textarea>
         </div>
 
-        <button type="submit" class="form-submit">Send My Enquiry — It's Free →</button>
-        <p class="form-note">🔒 Your details are kept private. No spam, ever.</p>
+        <button type="submit" class="form-submit">Submit</button>
       </form>
     </div>
   </div>
@@ -1365,7 +1465,7 @@
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-logo">MR<span>F</span> — Michael Roarty Fitness</div>
+  <div class="footer-logo"><img src="mrf-logo-transparent.png" alt="MRF Fitness Logo" style="height:56px;width:auto;object-fit:contain;border-radius:50%;padding:5px;background:radial-gradient(circle, rgba(255,255,255,0.92) 40%, rgba(255,255,255,0.4) 70%, transparent 100%);-webkit-mask-image:radial-gradient(circle, black 40%, transparent 75%);mask-image:radial-gradient(circle, black 40%, transparent 75%);"></div>
   <p class="footer-copy">© 2026 Michael Roarty Fitness. All rights reserved.</p>
   <div class="footer-socials">
     <a href="#" class="social-btn">IG</a>
@@ -1394,16 +1494,55 @@
   // Form handler
   function handleSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.form-submit');
-    btn.textContent = '✓ Enquiry Sent! Michael will be in touch soon.';
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Submitted!';
     btn.style.background = '#4CAF50';
     btn.style.color = 'white';
     btn.disabled = true;
+    const msg = document.createElement('p');
+    msg.textContent = 'Thank you for getting in touch — Michael will be in touch with you soon!';
+    msg.style.cssText = 'color:#F5F5F0;font-family:Barlow Condensed,sans-serif;font-size:1rem;letter-spacing:0.05em;margin-top:1rem;text-align:center;';
+    form.appendChild(msg);
   }
 
   // Stagger service cards
   document.querySelectorAll('.service-card').forEach((card, i) => {
     card.style.animationDelay = `${i * 0.1}s`;
+  });
+
+  // Before/After carousel lightbox
+  const baClients = [
+    { name: 'Ciara M.',  stat: '-18kg',      tag: '16 Week Fat Loss' },
+    { name: 'Sean K.',   stat: '+9kg Lean',  tag: '20 Week Muscle Build' },
+    { name: 'Aoife T.',  stat: '-12% BF',    tag: '12 Week Body Recomp' },
+    { name: 'Darren F.', stat: 'Stage Ready',tag: '24 Week Comp Prep' },
+    { name: 'Emma R.',   stat: '-22kg',      tag: '24 Week Programme' },
+    { name: 'Niamh O.',  stat: '-15kg',      tag: '20 Week Online Coaching' },
+    { name: 'Conor M.',  stat: '-14kg',      tag: '16 Week Fat Loss' },
+    { name: 'Laura B.',  stat: '+7kg Lean',  tag: '18 Week Muscle Build' },
+  ];
+
+  function openBALightbox(i) {
+    const lb = document.getElementById('baLightbox');
+    document.getElementById('baLbName').textContent = baClients[i].name;
+    lb.classList.add('active');
+    document.getElementById('baCarouselWrap').classList.add('paused');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBALightbox() {
+    document.getElementById('baLightbox').classList.remove('active');
+    document.getElementById('baCarouselWrap').classList.remove('paused');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('baLightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeBALightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeBALightbox();
   });
 </script>
 
