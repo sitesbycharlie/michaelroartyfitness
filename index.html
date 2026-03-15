@@ -114,6 +114,52 @@
     }
     .nav-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
 
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(10,10,10,0.98);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 1rem 5%;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(245,245,240,0.06);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--white); }
+
     /* ─── HERO ─── */
     #hero {
       min-height: 75vh;
@@ -1260,6 +1306,8 @@
     @media (max-width: 768px) {
       nav { position: relative; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
       .about-inner { grid-template-columns: 1fr; }
       .about-image-stack { height: 350px; }
       .services-grid { grid-template-columns: 1fr; }
@@ -1284,10 +1332,20 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#results">Results</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="./faq/">FAQ</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Start Today</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#results" onclick="closeMenu()">Results</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#contact" onclick="closeMenu()" style="color:var(--gold);font-weight:700;">Start Today</a>
+</div>
 
 <!-- ─── HERO ─── -->
 <section id="hero">
@@ -1696,13 +1754,22 @@
 <footer>
   <div class="footer-logo"><img src="mrf-logo-transparent.png" alt="MRF Fitness Logo" style="height:56px;width:auto;object-fit:contain;border-radius:50%;padding:5px;background:radial-gradient(circle, rgba(255,255,255,0.92) 40%, rgba(255,255,255,0.4) 70%, transparent 100%);-webkit-mask-image:radial-gradient(circle, black 40%, transparent 75%);mask-image:radial-gradient(circle, black 40%, transparent 75%);"></div>
   <p class="footer-copy">© 2026 Michael Roarty Fitness. All rights reserved.</p>
-  <a href="./faq/" style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">FAQ</a>
   <div class="footer-socials">
     <a href="https://www.instagram.com/michaelroartyfitness/" target="_blank" class="social-btn">IG</a>
   </div>
 </footer>
 
 <script>
+  // Hamburger menu
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
