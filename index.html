@@ -803,6 +803,22 @@
     }
     .service-card:hover .service-link { gap: 0.9rem; }
 
+    .most-popular-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 0.25rem 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+    .service-card-popular {
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+
     /* ─── RESULTS ─── */
     #results {
       background: var(--dark);
@@ -915,7 +931,8 @@
     }
     .ba-card-overlay-stat,
     .ba-card-overlay-tag,
-    .ba-card-overlay-icon { display: none; }
+    .ba-card-overlay-icon,
+    .ba-card-overlay-name { display: none; }
 
     .ba-card-overlay-name {
       font-family: 'Bebas Neue', sans-serif;
@@ -1379,28 +1396,6 @@
 
 </section>
 
-<!-- ─── STATS ─── -->
-<section id="stats">
-  <div class="stats-inner reveal">
-    <div class="stat-item">
-      <div class="stat-number">50+</div>
-      <div class="stat-label">Clients Transformed</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">5+</div>
-      <div class="stat-label">Years Coaching</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">30kg</div>
-      <div class="stat-label">Michael's Own Loss</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Online & In-Person</div>
-    </div>
-  </div>
-</section>
-
 <!-- ─── ABOUT ─── -->
 <section id="about">
   <div class="about-inner">
@@ -1469,7 +1464,8 @@
       <p class="service-desc">Fully coached sessions in the gym with Michael by your side. Every rep, every set — guided with purpose. Perfect for beginners or those who want elite-level accountability.</p>
     </div>
 
-    <div class="service-card">
+    <div class="service-card service-card-popular">
+      <div class="most-popular-badge">⭐ Most Popular</div>
       <div class="service-num">02</div>
       <div class="service-icon">📱</div>
       <div class="service-name">Online Coaching</div>
@@ -1518,88 +1514,37 @@
   <div class="ba-carousel-wrap" id="baCarouselWrap">
     <div class="ba-carousel-track" id="baCarouselTrack">
 
-      <!-- 8 cards — duplicated below for seamless loop -->
-      <div class="ba-card" onclick="openBALightbox(0)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Ciara M.</div><div class="ba-card-overlay-stat">-18kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
-
-      <div class="ba-card" onclick="openBALightbox(1)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Sean K.</div><div class="ba-card-overlay-stat">+9kg Lean</div><div class="ba-card-overlay-tag">20 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
-
-      <div class="ba-card" onclick="openBALightbox(2)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Aoife T.</div><div class="ba-card-overlay-stat">-12% BF</div><div class="ba-card-overlay-tag">12 Week Body Recomp</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
-
-      <div class="ba-card" onclick="openBALightbox(3)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Darren F.</div><div class="ba-card-overlay-stat">Stage Ready</div><div class="ba-card-overlay-tag">24 Week Comp Prep</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
-
-      <div class="ba-card" onclick="openBALightbox(4)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Emma R.</div><div class="ba-card-overlay-stat">-22kg</div><div class="ba-card-overlay-tag">24 Week Programme</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
-
-      <div class="ba-card" onclick="openBALightbox(5)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Niamh O.</div><div class="ba-card-overlay-stat">-15kg</div><div class="ba-card-overlay-tag">20 Week Online Coaching</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
-
-      <div class="ba-card" onclick="openBALightbox(6)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Conor M.</div><div class="ba-card-overlay-stat">-14kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
-
-      <div class="ba-card" onclick="openBALightbox(7)">
-        <div class="ba-card-inner">
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div>
-          <div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div>
-        </div>
-        <div class="ba-card-divider"></div>
-        <div class="ba-card-overlay"><div class="ba-card-overlay-name">Laura B.</div><div class="ba-card-overlay-stat">+7kg Lean</div><div class="ba-card-overlay-tag">18 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div>
-      </div>
+      <!-- 14 unique cards -->
+      <div class="ba-card" onclick="openBALightbox(0)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation1.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation1.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(1)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(2)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation3.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation3.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(3)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation4.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation4.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(4)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation5.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation5.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(5)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation6.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation6.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(6)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation7.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation7.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(7)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation8.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation8.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(8)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation9.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation9.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(9)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation10.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation10.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(10)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation11.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation11.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(11)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation12.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation12.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(12)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation13.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation13.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(13)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation14.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation14.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
 
       <!-- Duplicate set for seamless loop -->
-      <div class="ba-card" onclick="openBALightbox(0)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Ciara M.</div><div class="ba-card-overlay-stat">-18kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div></div>
-      <div class="ba-card" onclick="openBALightbox(1)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Sean K.</div><div class="ba-card-overlay-stat">+9kg Lean</div><div class="ba-card-overlay-tag">20 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div></div>
-      <div class="ba-card" onclick="openBALightbox(2)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Aoife T.</div><div class="ba-card-overlay-stat">-12% BF</div><div class="ba-card-overlay-tag">12 Week Body Recomp</div><div class="ba-card-overlay-icon">⊕</div></div></div>
-      <div class="ba-card" onclick="openBALightbox(3)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Darren F.</div><div class="ba-card-overlay-stat">Stage Ready</div><div class="ba-card-overlay-tag">24 Week Comp Prep</div><div class="ba-card-overlay-icon">⊕</div></div></div>
-      <div class="ba-card" onclick="openBALightbox(4)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Emma R.</div><div class="ba-card-overlay-stat">-22kg</div><div class="ba-card-overlay-tag">24 Week Programme</div><div class="ba-card-overlay-icon">⊕</div></div></div>
-      <div class="ba-card" onclick="openBALightbox(5)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Niamh O.</div><div class="ba-card-overlay-stat">-15kg</div><div class="ba-card-overlay-tag">20 Week Online Coaching</div><div class="ba-card-overlay-icon">⊕</div></div></div>
-      <div class="ba-card" onclick="openBALightbox(6)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Conor M.</div><div class="ba-card-overlay-stat">-14kg</div><div class="ba-card-overlay-tag">16 Week Fat Loss</div><div class="ba-card-overlay-icon">⊕</div></div></div>
-      <div class="ba-card" onclick="openBALightbox(7)"><div class="ba-card-inner"><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">Before</div></div><div class="ba-card-half"><div class="img-placeholder" style="height:100%;border-radius:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="ba-card-half-label">After</div></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"><div class="ba-card-overlay-name">Laura B.</div><div class="ba-card-overlay-stat">+7kg Lean</div><div class="ba-card-overlay-tag">18 Week Muscle Build</div><div class="ba-card-overlay-icon">⊕</div></div></div>
+      <div class="ba-card" onclick="openBALightbox(0)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation1.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation1.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(1)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(2)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation3.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation3.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(3)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation4.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation4.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(4)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation5.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation5.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(5)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation6.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation6.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(6)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation7.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation7.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(7)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation8.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation8.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(8)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation9.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation9.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(9)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation10.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation10.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(10)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation11.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation11.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(11)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation12.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation12.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(12)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation13.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation13.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(13)"><div class="ba-card-inner"><div class="ba-card-half"><img src="transformation14.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="ba-card-half"><img src="transformation14.jpg" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><div class="ba-card-divider"></div><div class="ba-card-overlay"></div></div>
 
     </div>
   </div>
@@ -1608,17 +1553,8 @@
   <div class="ba-lightbox" id="baLightbox">
     <div class="ba-lightbox-inner">
       <button class="ba-lightbox-close" onclick="closeBALightbox()">✕</button>
-      <div class="ba-lightbox-split">
-        <div class="ba-lightbox-half">
-          <div class="img-placeholder" style="height:460px;border-radius:0;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="ba-lightbox-half-label">Before</div>
-        </div>
-        <div class="ba-lightbox-half">
-          <div class="img-placeholder" style="height:460px;border-radius:0;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-          <div class="ba-lightbox-half-label">After</div>
-        </div>
-      </div>
-      <div class="ba-lightbox-info">
+      <img id="baLbImg" src="" alt="Transformation" style="width:100%;max-height:80vh;object-fit:contain;display:block;">
+      <div class="ba-lightbox-info" style="display:none;">
         <div class="ba-lightbox-name" id="baLbName"></div>
       </div>
     </div>
@@ -1810,18 +1746,25 @@
 
   // Before/After carousel lightbox
   const baClients = [
-    { name: 'Ciara M.',  stat: '-18kg',      tag: '16 Week Fat Loss' },
-    { name: 'Sean K.',   stat: '+9kg Lean',  tag: '20 Week Muscle Build' },
-    { name: 'Aoife T.',  stat: '-12% BF',    tag: '12 Week Body Recomp' },
-    { name: 'Darren F.', stat: 'Stage Ready',tag: '24 Week Comp Prep' },
-    { name: 'Emma R.',   stat: '-22kg',      tag: '24 Week Programme' },
-    { name: 'Niamh O.',  stat: '-15kg',      tag: '20 Week Online Coaching' },
-    { name: 'Conor M.',  stat: '-14kg',      tag: '16 Week Fat Loss' },
-    { name: 'Laura B.',  stat: '+7kg Lean',  tag: '18 Week Muscle Build' },
+    { name: 'Client 1' },
+    { name: 'Client 2' },
+    { name: 'Client 3' },
+    { name: 'Client 4' },
+    { name: 'Client 5' },
+    { name: 'Client 6' },
+    { name: 'Client 7' },
+    { name: 'Client 8' },
+    { name: 'Client 9' },
+    { name: 'Client 10' },
+    { name: 'Client 11' },
+    { name: 'Client 12' },
+    { name: 'Client 13' },
+    { name: 'Client 14' },
   ];
 
   function openBALightbox(i) {
     const lb = document.getElementById('baLightbox');
+    document.getElementById('baLbImg').src = `transformation${i+1}.jpg`;
     document.getElementById('baLbName').textContent = baClients[i].name;
     lb.classList.add('active');
     document.getElementById('baCarouselWrap').classList.add('paused');
