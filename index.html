@@ -229,8 +229,17 @@
     }
 
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo-wrap { display: none; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .hero-photo-wrap {
+        display: flex;
+        justify-content: center;
+      }
+      .hero-photo-wrap img {
+        max-width: 280px;
+      }
     }
 
     .hero-eyebrow {
