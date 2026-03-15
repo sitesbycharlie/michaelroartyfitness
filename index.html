@@ -204,13 +204,28 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
+      position: relative;
     }
-
-    .hero-photo-wrap .img-placeholder {
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 60%;
+      background: radial-gradient(ellipse at center bottom, rgba(39,115,236,0.25) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-photo-wrap img {
+      position: relative;
+      z-index: 1;
       width: 100%;
-      max-width: 420px;
-      height: 520px;
-      border-radius: 4px;
+      max-width: 500px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 40px rgba(39,115,236,0.15));
     }
 
     @media (max-width: 900px) {
@@ -1393,7 +1408,7 @@
     </div>
 
     <div class="hero-photo-wrap">
-      <img src="michael-photo.png" alt="Michael Roarty" style="width:100%;max-width:420px;height:auto;display:block;border-radius:4px;">
+      <img src="michael-photo.jpg" alt="Michael Roarty">
     </div>
   </div>
 
