@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Michael Roarty Fitness | Personal Trainer Donegal, Ireland" />
   <meta property="og:description" content="Certified personal trainer based in Donegal, Ireland. Online coaching, fat loss, muscle building and nutrition programmes designed around you." />
-  <meta property="og:image" content="michael-photo.png" />
+  <meta property="og:image" content="michael-photo.jpg" />
   <meta property="og:url" content="https://michaelroartyfitness.com/" />
   <meta property="og:site_name" content="Michael Roarty Fitness" />
 
@@ -24,7 +24,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Michael Roarty Fitness | Personal Trainer Donegal, Ireland" />
   <meta name="twitter:description" content="Certified personal trainer based in Donegal, Ireland. Online coaching, fat loss, muscle building and nutrition programmes designed around you." />
-  <meta name="twitter:image" content="michael-photo.png" />
+  <meta name="twitter:image" content="michael-photo.jpg" />
 
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
@@ -204,58 +204,36 @@
     .hero-content {
       position: relative;
       z-index: 2;
+      max-width: 700px;
     }
 
     .hero-inner {
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
       width: 100%;
       max-width: 1200px;
     }
 
-    .hero-photo-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      position: relative;
-    }
-    .hero-photo-wrap::before {
-      content: '';
+    .hero-bg-img {
       position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 70%;
-      background: radial-gradient(ellipse at center bottom, rgba(39,115,236,0.3) 0%, transparent 70%);
+      inset: 0;
+      background-image: url('michael-photo.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
       z-index: 0;
-      pointer-events: none;
-    }
-    .hero-photo-wrap img {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 640px;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 0 50px rgba(39,115,236,0.2));
     }
 
-    @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .hero-photo-wrap {
-        display: flex;
-        justify-content: center;
-      }
-      .hero-photo-wrap img {
-        max-width: 280px;
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.82) 40%, rgba(0,0,0,0.3) 100%);
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .hero-bg-overlay {
+        background: rgba(0,0,0,0.65);
       }
     }
 
@@ -1469,7 +1447,8 @@
 <!-- ─── HERO ─── -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-bg-img"></div>
+  <div class="hero-bg-overlay"></div>
 
   <div class="hero-inner">
     <div class="hero-content">
@@ -1486,12 +1465,7 @@
         <a href="#contact" class="btn-primary">Book a Free Consultation</a>
       </div>
     </div>
-
-    <div class="hero-photo-wrap">
-      <img src="michael-photo.png" alt="Michael Roarty">
-    </div>
   </div>
-
 
 </section>
 
