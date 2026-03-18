@@ -1439,7 +1439,7 @@
     .transformation-grid-title span { color: var(--gold); }
     .transformation-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       gap: 0.6rem;
     }
     .transformation-grid-item {
@@ -1458,7 +1458,7 @@
     .transformation-grid-item:hover img { transform: scale(1.04); }
 
     @media (max-width: 900px) {
-      .transformation-grid { grid-template-columns: repeat(3, 1fr); }
+      .transformation-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
     /* ─── ANIMATIONS ─── */
@@ -1799,6 +1799,8 @@
       <div class="transformation-grid-item" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
       <div class="transformation-grid-item" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
       <div class="transformation-grid-item" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
     </div>
   </div>
 </section>
@@ -2005,9 +2007,11 @@
     { name: 'Client 10' },
     { name: 'Client 11' },
     { name: 'Client 12' },
+    { name: 'Client 13' },
+    { name: 'Client 14' },
   ];
 
-  const totalPhotos = 12;
+  const totalPhotos = 14;
   let currentPhoto = 0;
   let touchStartX = 0;
 
