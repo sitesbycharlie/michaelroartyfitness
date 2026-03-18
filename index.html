@@ -1794,10 +1794,10 @@
     const btn = document.getElementById('playBtn');
     if (video.paused) {
       video.play();
-      btn.classList.add('hidden');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
     } else {
       video.pause();
-      btn.classList.remove('hidden');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
     }
   }
   function expandVideo() {
@@ -1812,7 +1812,7 @@
     }
   }
   document.getElementById('testimonialVideo').addEventListener('ended', function() {
-    document.getElementById('playBtn').classList.remove('hidden');
+    document.getElementById('playBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
   });
 
   // Hamburger menu
