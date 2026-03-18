@@ -919,7 +919,7 @@
       height: 100%;
       width: auto;
       display: block;
-      object-fit: contain;
+      object-fit: cover;
     }
     .ba-card:hover { opacity: 0.85; transition: opacity 0.2s; }
     .ba-card:hover .ba-card-overlay { opacity: 1; }
@@ -1093,7 +1093,7 @@
     .ba-lightbox-close:hover { opacity: 1; }
 
     @media (max-width: 768px) {
-      .ba-card { width: 260px; height: 420px; }
+      .ba-card { width: 85vw; height: 85vw; max-width: 340px; max-height: 340px; }
       .ba-lightbox-half .img-placeholder { height: 220px; }
     }
 
