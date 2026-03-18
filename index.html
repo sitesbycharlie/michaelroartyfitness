@@ -1128,6 +1128,40 @@
     .testimonial-stars,
     .testimonial-detail { display: none; }
 
+    /* ─── VIDEO TESTIMONIAL ─── */
+    .video-testimonial {
+      max-width: 800px;
+      margin: 4rem auto 0;
+      text-align: center;
+    }
+    .video-wrap {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--mid);
+    }
+    .video-wrap video {
+      width: 100%;
+      display: block;
+    }
+    .video-play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .video-play-btn:hover { background: rgba(0,0,0,0.5); }
+    .video-play-btn svg {
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+      transition: transform 0.2s;
+    }
+    .video-play-btn:hover svg { transform: scale(1.1); }
+    .video-play-btn.hidden { display: none; }
+
     .testimonial-author {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 0.85rem;
@@ -1608,6 +1642,17 @@
       <div class="testimonial-detail">Cutting Phase</div>
     </div>
   </div>
+
+  <!-- Video Testimonial -->
+  <div class="video-testimonial reveal">
+    <div class="section-label">Video Testimonial</div>
+    <div class="video-wrap">
+      <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
+      <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
+        <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ─── HOW IT WORKS ─── -->
@@ -1723,6 +1768,22 @@
 </footer>
 
 <script>
+  // Video testimonial
+  function toggleVideo() {
+    const video = document.getElementById('testimonialVideo');
+    const btn = document.getElementById('playBtn');
+    if (video.paused) {
+      video.play();
+      btn.classList.add('hidden');
+    } else {
+      video.pause();
+      btn.classList.remove('hidden');
+    }
+  }
+  document.getElementById('testimonialVideo').addEventListener('ended', function() {
+    document.getElementById('playBtn').classList.remove('hidden');
+  });
+
   // Hamburger menu
   function toggleMenu() {
     document.getElementById('hamburger').classList.toggle('open');
