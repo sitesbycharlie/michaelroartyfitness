@@ -1087,6 +1087,40 @@
     }
     .ba-lightbox-close:hover { opacity: 1; }
 
+    .ba-lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      font-size: 1.4rem;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+      border-radius: 2px;
+    }
+    .ba-lightbox-arrow:hover { background: rgba(255,255,255,0.25); }
+    .ba-lightbox-arrow.prev { left: -64px; }
+    .ba-lightbox-arrow.next { right: -64px; }
+    .ba-lightbox-counter {
+      text-align: center;
+      margin-top: 0.8rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+    }
+    @media (max-width: 768px) {
+      .ba-lightbox-arrow { display: none; }
+      .ba-lightbox { padding: 1rem; }
+    }
+
     @media (max-width: 768px) {
       .ba-card { width: 92vw; height: auto; max-width: 360px; }
       .ba-card img { width: 100%; height: auto; object-fit: contain; }
@@ -1704,7 +1738,10 @@
   <div class="ba-lightbox" id="baLightbox">
     <div class="ba-lightbox-inner">
       <button class="ba-lightbox-close" onclick="closeBALightbox()">✕</button>
+      <button class="ba-lightbox-arrow prev" onclick="prevPhoto()">&#8592;</button>
+      <button class="ba-lightbox-arrow next" onclick="nextPhoto()">&#8594;</button>
       <img id="baLbImg" src="" alt="Transformation" style="width:100%;max-height:80vh;object-fit:contain;display:block;">
+      <div class="ba-lightbox-counter" id="baLbCounter"></div>
       <div class="ba-lightbox-info" style="display:none;">
         <div class="ba-lightbox-name" id="baLbName"></div>
       </div>
@@ -1970,13 +2007,32 @@
     { name: 'Client 12' },
   ];
 
+  const totalPhotos = 12;
+  let currentPhoto = 0;
+  let touchStartX = 0;
+
   function openBALightbox(i) {
-    const lb = document.getElementById('baLightbox');
-    document.getElementById('baLbImg').src = `transformation${i+1}.jpg`;
-    document.getElementById('baLbName').textContent = baClients[i].name;
-    lb.classList.add('active');
+    currentPhoto = i;
+    updateLightbox();
+    document.getElementById('baLightbox').classList.add('active');
     document.getElementById('baCarouselWrap').classList.add('paused');
     document.body.style.overflow = 'hidden';
+  }
+
+  function updateLightbox() {
+    document.getElementById('baLbImg').src = `transformation${currentPhoto + 1}.jpg`;
+    document.getElementById('baLbCounter').textContent = `${currentPhoto + 1} / ${totalPhotos}`;
+    document.getElementById('baLbName').textContent = baClients[currentPhoto].name;
+  }
+
+  function prevPhoto() {
+    currentPhoto = (currentPhoto - 1 + totalPhotos) % totalPhotos;
+    updateLightbox();
+  }
+
+  function nextPhoto() {
+    currentPhoto = (currentPhoto + 1) % totalPhotos;
+    updateLightbox();
   }
 
   function closeBALightbox() {
@@ -1984,6 +2040,31 @@
     document.getElementById('baCarouselWrap').classList.remove('paused');
     document.body.style.overflow = '';
   }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('baLightbox').classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') prevPhoto();
+    if (e.key === 'ArrowRight') nextPhoto();
+    if (e.key === 'Escape') closeBALightbox();
+  });
+
+  // Touch swipe
+  document.getElementById('baLightbox').addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+  });
+  document.getElementById('baLightbox').addEventListener('touchend', function(e) {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextPhoto();
+      else prevPhoto();
+    }
+  });
+
+  // Close on background click
+  document.getElementById('baLightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeBALightbox();
+  });
 
   document.getElementById('baLightbox').addEventListener('click', function(e) {
     if (e.target === this) closeBALightbox();
