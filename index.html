@@ -1139,6 +1139,8 @@
       border-radius: 6px;
       overflow: hidden;
       background: var(--mid);
+      width: 280px;
+      margin: 1rem auto 0;
     }
     .video-wrap video {
       width: 100%;
@@ -1161,6 +1163,23 @@
     }
     .video-play-btn:hover svg { transform: scale(1.1); }
     .video-play-btn.hidden { display: none; }
+    .video-expand {
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .video-expand:hover { color: var(--gold); }
+    .video-wrap.expanded {
+      width: 100%;
+      max-width: 800px;
+    }
 
     .testimonial-author {
       font-family: 'Barlow Condensed', sans-serif;
@@ -1646,12 +1665,13 @@
   <!-- Video Testimonial -->
   <div class="video-testimonial reveal">
     <div class="section-label">Video Testimonial</div>
-    <div class="video-wrap">
+    <div class="video-wrap" id="videoWrap">
       <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
       <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
         <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
       </div>
     </div>
+    <span class="video-expand" id="expandBtn" onclick="expandVideo()">⤢ Expand</span>
   </div>
 </section>
 
@@ -1778,6 +1798,17 @@
     } else {
       video.pause();
       btn.classList.remove('hidden');
+    }
+  }
+  function expandVideo() {
+    const wrap = document.getElementById('videoWrap');
+    const btn = document.getElementById('expandBtn');
+    if (wrap.classList.contains('expanded')) {
+      wrap.classList.remove('expanded');
+      btn.textContent = '⤢ Expand';
+    } else {
+      wrap.classList.add('expanded');
+      btn.textContent = '⤡ Collapse';
     }
   }
   document.getElementById('testimonialVideo').addEventListener('ended', function() {
