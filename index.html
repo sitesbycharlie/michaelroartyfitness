@@ -896,7 +896,7 @@
       display: flex;
       gap: 1.2rem;
       width: max-content;
-      animation: baScroll 32s linear infinite;
+      animation: baScroll 55s linear infinite;
     }
     @keyframes baScroll {
       0% { transform: translateX(0); }
@@ -907,7 +907,7 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      height: 480px;
+      height: 380px;
       width: auto;
     }
     .ba-card img {
@@ -1392,6 +1392,41 @@
     }
     .social-btn:hover { border-color: var(--gold); color: var(--gold); }
 
+    /* ─── TRANSFORMATION GRID ─── */
+    .transformation-grid-wrap {
+      margin-top: 5rem;
+    }
+    .transformation-grid-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 2.5rem;
+    }
+    .transformation-grid-title span { color: var(--gold); }
+    .transformation-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+    }
+    .transformation-grid-item {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .transformation-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .transformation-grid-item:hover img { transform: scale(1.04); }
+
+    @media (max-width: 900px) {
+      .transformation-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -1465,6 +1500,9 @@
       .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
       .form-row { grid-template-columns: 1fr; }
       .contact-left { text-align: left; }
+
+      /* Transformation grid */
+      .transformation-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
 
       /* Footer */
       footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 5%; }
@@ -1635,34 +1673,30 @@
   <!-- Looping square before/after carousel -->
   <div class="ba-carousel-wrap" id="baCarouselWrap">
     <div class="ba-carousel-track" id="baCarouselTrack">
-      <div class="ba-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div>
-      <div class="ba-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div>
-      <div class="ba-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div>
-      <div class="ba-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"></div>
-      <div class="ba-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"></div>
-      <div class="ba-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"></div>
-      <div class="ba-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"></div>
-      <div class="ba-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"></div>
-      <div class="ba-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"></div>
-      <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
-      <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
-      <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
-      <div class="ba-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
-      <div class="ba-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
-      <div class="ba-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div>
-      <div class="ba-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div>
-      <div class="ba-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div>
-      <div class="ba-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"></div>
-      <div class="ba-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"></div>
-      <div class="ba-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"></div>
-      <div class="ba-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"></div>
-      <div class="ba-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"></div>
-      <div class="ba-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"></div>
-      <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
-      <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
-      <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
-      <div class="ba-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
-      <div class="ba-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
+      <div class="ba-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"><div class="ba-card-overlay"></div></div>
+      <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"><div class="ba-card-overlay"></div></div>
     </div>
   </div>
 
@@ -1709,6 +1743,26 @@
       </div>
     </div>
     <span class="video-expand" id="expandBtn" onclick="expandVideo()">⤢ Expand</span>
+  </div>
+
+  <!-- Full Photo Library -->
+  <div class="transformation-grid-wrap reveal">
+    <div class="section-label">Full Library</div>
+    <h3 class="transformation-grid-title">ALL <span>TRANSFORMATIONS.</span></h3>
+    <div class="transformation-grid">
+      <div class="transformation-grid-item" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
+    </div>
   </div>
 </section>
 
@@ -1914,8 +1968,6 @@
     { name: 'Client 10' },
     { name: 'Client 11' },
     { name: 'Client 12' },
-    { name: 'Client 13' },
-    { name: 'Client 14' },
   ];
 
   function openBALightbox(i) {
