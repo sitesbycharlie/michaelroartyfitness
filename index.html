@@ -190,6 +190,23 @@
     .hero-bg { position: absolute; inset: 0; }
     .hero-grid { display: none; }
 
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('michael-photo.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.55) 30%, rgba(0,0,0,0.1) 100%);
+      z-index: 1;
+    }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -203,30 +220,40 @@
       max-width: 1200px;
     }
 
-    .hero-bg-img {
+    .hero-photo-wrap { display: none; }
+
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+    }
+    .hero-photo-wrap::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      background-image: url('michael-photo.jpg');
-      background-size: cover;
-      background-position: right center;
-      background-repeat: no-repeat;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 70%;
+      background: radial-gradient(ellipse at center bottom, rgba(39,115,236,0.3) 0%, transparent 70%);
       z-index: 0;
+      pointer-events: none;
     }
-
-    .hero-bg-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.75) 30%, rgba(0,0,0,0.1) 100%);
+    .hero-photo-wrap img {
+      position: relative;
       z-index: 1;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 50px rgba(39,115,236,0.2));
     }
 
-    @media (max-width: 768px) {
-      .hero-bg-img {
-        background-position: right center;
-      }
-      .hero-bg-overlay {
-        background: linear-gradient(to right, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.1) 100%);
-      }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-photo-wrap { justify-content: center; }
+      .hero-photo-wrap img { max-width: 280px; }
     }
 
     .hero-eyebrow {
@@ -243,13 +270,11 @@
       opacity: 0;
       animation: fadeUp 0.8s ease 0.2s forwards;
     }
-    .hero-eyebrow::before {
-      display: none;
-    }
+    .hero-eyebrow::before { display: none; }
 
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 8vw, 8rem);
+      font-size: clamp(3.5rem, 8vw, 8rem);
       line-height: 0.9;
       letter-spacing: 0.03em;
       margin-bottom: 1.5rem;
@@ -263,7 +288,7 @@
       font-size: 1rem;
       font-weight: 300;
       line-height: 1.7;
-      color: rgba(245,245,240,0.8);
+      color: rgba(245,245,240,0.65);
       max-width: 480px;
       margin-bottom: 2.5rem;
       opacity: 0;
