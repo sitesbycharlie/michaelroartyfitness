@@ -1890,7 +1890,11 @@
     </div>
 
     <div class="reveal">
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" onsubmit="handleSubmit(event)" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="476499dd-f143-4b5c-9a48-28ea3a9e2785">
+        <input type="hidden" name="subject" value="New Enquiry — MRF Fitness">
+        <input type="hidden" name="from_name" value="MRF Fitness Website">
+        <input type="checkbox" name="botcheck" style="display:none;">
         <div class="form-row">
           <div class="form-group">
             <label>First Name *</label>
@@ -2024,18 +2028,39 @@
   });
 
   // Form handler
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const btn = form.querySelector('.star-btn-gold');
-    btn.textContent = 'Submitted!';
-    btn.style.background = '#4CAF50';
-    btn.style.color = 'white';
+    const data = new FormData(form);
+
+    btn.textContent = 'Sending...';
     btn.disabled = true;
-    const msg = document.createElement('p');
-    msg.textContent = 'Thank you for getting in touch — Michael will be in touch with you soon!';
-    msg.style.cssText = 'color:#F5F5F0;font-family:Barlow Condensed,sans-serif;font-size:1rem;letter-spacing:0.05em;margin-top:1rem;text-align:center;';
-    form.appendChild(msg);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        btn.textContent = 'Submitted!';
+        btn.style.background = '#4CAF50';
+        btn.style.borderColor = '#4CAF50';
+        btn.style.color = 'white';
+        const msg = document.createElement('p');
+        msg.textContent = 'Thank you for getting in touch — Michael will be in touch with you soon!';
+        msg.style.cssText = 'color:#F5F5F0;font-family:Barlow Condensed,sans-serif;font-size:1rem;letter-spacing:0.05em;margin-top:1rem;text-align:center;';
+        form.appendChild(msg);
+      } else {
+        btn.textContent = 'Something went wrong — please try again';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      btn.textContent = 'Something went wrong — please try again';
+      btn.disabled = false;
+    }
   }
 
   // Stagger service cards
