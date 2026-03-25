@@ -1132,7 +1132,7 @@
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
     }
 
@@ -1457,6 +1457,10 @@
       transition: transform 0.3s ease;
     }
     .transformation-grid-item:hover img { transform: scale(1.04); }
+
+    @media (max-width: 1024px) {
+      .testimonials { grid-template-columns: repeat(2, 1fr); }
+    }
 
     @media (max-width: 900px) {
       .transformation-grid { grid-template-columns: repeat(4, 1fr); }
@@ -1818,6 +1822,12 @@
       <div class="testimonial-author">Christopher</div>
       <div class="testimonial-detail">Cutting Phase</div>
     </div>
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"10 weeks of online coaching with Michael — down 6kg, lifting heavier than ever, and finally understanding nutrition. I've dropped a clothes size, getting compliments, and most importantly I feel great in myself. Michael has been a brilliant support and has plenty of knowledge. A great kick-start to keep progressing."</p>
+      <div class="testimonial-author">Paul</div>
+      <div class="testimonial-detail">Online Coaching</div>
+    </div>
   </div>
 
   <!-- Video Testimonial -->
@@ -1834,8 +1844,7 @@
 
   <!-- Full Photo Library -->
   <div class="transformation-grid-wrap reveal">
-    <div class="section-label">Full Library</div>
-    <h3 class="transformation-grid-title">ALL <span>TRANSFORMATIONS.</span></h3>
+    <h3 class="transformation-grid-title"><span>TRANSFORMATIONS</span></h3>
     <div class="transformation-grid">
       <div class="transformation-grid-item" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div>
       <div class="transformation-grid-item" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div>
