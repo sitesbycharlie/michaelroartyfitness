@@ -43,9 +43,8 @@
       --text-muted: #888;
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { overflow-x: hidden; max-width: 100%; }
     html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; max-width: 100vw; position: relative; }
+    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; }
     body::before {
       content: '';
       position: fixed;
@@ -135,20 +134,16 @@
       content: ''; display: block; position: absolute; top: 0; left: 5%; right: 5%;
       height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.25), transparent);
     }
-    .section-label {
-      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold);
-      margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;
-    }
-    .section-label::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
-    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; letter-spacing: 0.03em; margin-bottom: 1.5rem; }
+    .section-label { display: none; }
+    .section-label::before { display: none; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; letter-spacing: 0.03em; margin-bottom: 1.5rem; text-align: center; }
 
     /* ABOUT */
     #about { background: var(--dark); overflow: hidden; }
-    .about-inner { display: block; max-width: 800px; margin: 0 auto; }
+    .about-inner { display: block; max-width: 800px; margin: 0 auto; text-align: center; }
     .about-text .section-title span { color: var(--blue-light); }
-    .about-body { color: rgba(245,245,240,0.65); line-height: 1.8; margin-bottom: 1.5rem; }
-    .about-quals { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .about-body { color: rgba(245,245,240,0.65); line-height: 1.8; margin-bottom: 1.5rem; text-align: left; }
+    .about-quals { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; justify-content: center; }
     .qual-tag {
       font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 1rem;
@@ -159,8 +154,8 @@
 
     /* SERVICES */
     #services { background: var(--black); }
-    .services-header { max-width: 1200px; margin: 0 auto 4rem; display: flex; justify-content: space-between; align-items: flex-end; }
-    .services-header-right { max-width: 320px; color: rgba(245,245,240,0.5); font-size: 0.95rem; line-height: 1.7; text-align: right; }
+    .services-header { max-width: 1200px; margin: 0 auto 4rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
+    .services-header-right { max-width: 320px; color: rgba(245,245,240,0.5); font-size: 0.95rem; line-height: 1.7; text-align: center; }
     .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: rgba(201,168,76,0.1); }
     .service-card { background: var(--dark); padding: 2.5rem 2rem; position: relative; overflow: hidden; cursor: pointer; transition: background 0.3s, color 0.3s; }
     .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--black); transition: height 0.4s ease; }
@@ -178,7 +173,7 @@
 
     /* RESULTS */
     #results { background: var(--dark); overflow: hidden; }
-    .results-header { max-width: 1200px; margin: 0 auto 4rem; }
+    .results-header { max-width: 1200px; margin: 0 auto 4rem; text-align: center; }
     .results-header .section-title span { color: var(--gold); }
     .ba-carousel-wrap { position: relative; overflow: hidden; margin-bottom: 5rem; cursor: pointer; }
     .ba-carousel-wrap::before, .ba-carousel-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
@@ -228,7 +223,7 @@
 
     /* TRANSFORMATION GRID */
     .transformation-grid-wrap { margin-top: 5rem; }
-    .transformation-grid-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.05em; margin-bottom: 2.5rem; }
+    .transformation-grid-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.05em; margin-bottom: 2.5rem; text-align: center; }
     .transformation-grid-title span { color: var(--gold); }
     .transformation-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.6rem; }
     .transformation-grid-item { aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer; position: relative; }
@@ -237,7 +232,7 @@
 
     /* HOW IT WORKS */
     #how-it-works { background: var(--black); }
-    .hiw-inner { max-width: 1000px; margin: 0 auto; }
+    .hiw-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
     .hiw-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; position: relative; }
     .hiw-steps::before { content: ''; position: absolute; top: 2rem; left: calc(16.66% + 1rem); right: calc(16.66% + 1rem); height: 1px; background: linear-gradient(to right, rgba(39,115,236,0.4), rgba(39,115,236,0.1), rgba(39,115,236,0.4)); }
     .hiw-step { text-align: center; padding: 0 1rem; position: relative; }
@@ -324,12 +319,9 @@
     }
     @media (max-width: 380px) { .hero-title { font-size: 2.4rem; } .service-card { padding: 1.4rem; } }
 
-    /* MOBILE OVERFLOW FIX */
     @media (max-width: 768px) {
       html, body { overflow-x: hidden; max-width: 100vw; }
-      * { max-width: 100%; }
       img { max-width: 100%; height: auto; }
-      .ba-carousel-wrap { max-width: 100vw; }
       section { overflow-x: hidden; }
     }
   </style>
@@ -381,7 +373,6 @@
 <section id="about">
   <div class="about-inner">
     <div class="about-text">
-      <div class="section-label">About Michael</div>
       <h2 class="section-title">MORE THAN A<br><span>TRAINER.</span></h2>
       <p class="about-body">I'm Michael Roarty, a certified personal trainer and fitness instructor based in County Donegal, Ireland. Before getting into coaching, I lost 30kg myself. That journey changed everything. I fell in love with the gym, with nutrition, and with the structure and routine that comes with committing to a goal. That experience gave me something no qualification could, I know exactly what it takes, because I've lived it.</p>
       <p class="about-body">Since then, I've made it my mission to help others do the same. Whether you want to lose fat, build muscle, get stronger, or simply become a healthier version of yourself, for you, or for the people who matter most to you, I'll build a plan around your life and walk every step of the journey with you.</p>
@@ -405,7 +396,6 @@
 <section id="services">
   <div class="services-header reveal">
     <div>
-      <div class="section-label">What I Offer</div>
       <h2 class="section-title">COACHING<br>PROGRAMMES</h2>
     </div>
     <p class="services-header-right">Every programme is built around your life, your schedule, and your goal. Choose the path that works for you.</p>
@@ -453,7 +443,6 @@
 
 <section id="results">
   <div class="results-header reveal">
-    <div class="section-label">Client Transformations</div>
     <h2 class="section-title">REAL PEOPLE.<br><span>REAL RESULTS.</span></h2>
   </div>
 
@@ -519,7 +508,6 @@
   </div>
 
   <div class="video-testimonial reveal">
-    <div class="section-label">Video Testimonial</div>
     <div class="video-wrap" id="videoWrap">
       <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
       <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
@@ -552,7 +540,6 @@
 
 <section id="how-it-works">
   <div class="hiw-inner reveal">
-    <div class="section-label">The Process</div>
     <h2 class="section-title">HOW IT<br><span style="color:var(--blue)">WORKS.</span></h2>
     <div class="hiw-steps">
       <div class="hiw-step">
@@ -577,14 +564,13 @@
 <section id="contact">
   <div class="contact-inner">
     <div class="contact-left reveal">
-      <div class="section-label">Get Started</div>
       <h2 class="section-title">READY TO<br><span>TRANSFORM?</span></h2>
       <p>Fill out the form and Michael will be in touch within 24 hours to discuss your goals, answer your questions, and map out your path forward. No obligation. No pressure. Just results.</p>
     </div>
     <div class="reveal">
       <form class="contact-form" onsubmit="handleSubmit(event)" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="476499dd-f143-4b5c-9a48-28ea3a9e2785">
-        <input type="hidden" name="subject" value="New Enquiry MRF Fitness">
+        <input type="hidden" name="subject" value="New Enquiry, MRF Fitness">
         <input type="hidden" name="from_name" value="MRF Fitness Website">
         <input type="checkbox" name="botcheck" style="display:none;">
         <div class="form-row">
@@ -725,15 +711,15 @@
         btn.style.borderColor = '#4CAF50';
         btn.style.color = 'white';
         const msg = document.createElement('p');
-        msg.textContent = 'Thank you for getting in touch. Michael will be in touch with you soon!';
+        msg.textContent = 'Thank you for getting in touch, Michael will be in touch with you soon!';
         msg.style.cssText = 'color:#F5F5F0;font-family:Barlow Condensed,sans-serif;font-size:1rem;letter-spacing:0.05em;margin-top:1rem;text-align:center;';
         form.appendChild(msg);
       } else {
-        btn.textContent = 'Something went wrong. Please try again.';
+        btn.textContent = 'Something went wrong, please try again';
         btn.disabled = false;
       }
     } catch (err) {
-      btn.textContent = 'Something went wrong. Please try again.';
+      btn.textContent = 'Something went wrong, please try again';
       btn.disabled = false;
     }
   }
