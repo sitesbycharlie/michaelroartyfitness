@@ -202,10 +202,14 @@
     .ba-lightbox-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); letter-spacing: 0.1em; }
 
     /* TESTIMONIALS */
-    .testimonials { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .testimonial { padding: 2rem; background: var(--mid); border-left: 2px solid rgba(201,168,76,0.3); transition: border-color 0.3s; }
+    .testimonials-carousel-wrap { max-width: 1200px; margin: 0 auto; overflow: hidden; position: relative; }
+    .testimonials { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; cursor: grab; user-select: none; scrollbar-width: none; -ms-overflow-style: none; }
+    .testimonials::-webkit-scrollbar { display: none; }
+    .testimonials.dragging { cursor: grabbing; }
+    .testimonial { scroll-snap-align: start; }
+    .testimonial { padding: 2rem; background: var(--mid); border-left: 2px solid rgba(201,168,76,0.3); transition: border-color 0.3s; flex: 0 0 300px; min-width: 300px; display: flex; flex-direction: column; justify-content: space-between; }
     .testimonial:hover { border-color: var(--gold); }
-    .testimonial-text { font-size: 0.95rem; line-height: 1.7; color: rgba(245,245,240,0.7); margin-bottom: 1.5rem; font-style: italic; }
+    .testimonial-text { font-size: 0.9rem; line-height: 1.7; color: rgba(245,245,240,0.7); margin-bottom: 1.5rem; font-style: italic; flex: 1; }
     .testimonial-stars, .testimonial-detail { display: none; }
     .testimonial-author { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
 
@@ -277,7 +281,7 @@
     .nav-star-btn:hover { color: var(--black) !important; }
 
     /* MOBILE */
-    @media (max-width: 1024px) { .testimonials { grid-template-columns: repeat(2, 1fr); } }
+    
     @media (max-width: 900px) { .transformation-grid { grid-template-columns: repeat(4, 1fr); } }
     @media (max-width: 768px) {
       nav { position: relative; }
@@ -301,7 +305,7 @@
       .ba-carousel-wrap::before, .ba-carousel-wrap::after { width: 40px; }
       .ba-lightbox-arrow { display: none; }
       .ba-lightbox { padding: 1rem; }
-      .testimonials { grid-template-columns: 1fr; gap: 1.5rem; }
+      .testimonial { min-width: calc(100vw - 4rem); }
       .testimonial { padding: 1.5rem; }
       .testimonial-text { font-size: 0.9rem; }
       .video-wrap { width: 100%; }
@@ -324,6 +328,11 @@
       img { max-width: 100%; height: auto; }
       section { overflow-x: hidden; }
     }
+
+    .video-testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 700px; margin: 0 auto; }
+    .video-item { display: flex; flex-direction: column; align-items: center; }
+    .video-name { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-top: 0.5rem; }
+    @media (max-width: 768px) { .video-testimonials-grid { grid-template-columns: 1fr; gap: 2rem; } }
   </style>
 </head>
 <body>
@@ -460,6 +469,18 @@
       <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
       <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
       <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
+      <div class="ba-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
+      <div class="ba-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
+      <div class="ba-card" onclick="openBALightbox(14)"><img src="transformation15.jpg" alt="Transformation 15"></div>
+      <div class="ba-card" onclick="openBALightbox(15)"><img src="transformation16.jpg" alt="Transformation 16"></div>
+      <div class="ba-card" onclick="openBALightbox(16)"><img src="transformation17.jpg" alt="Transformation 17"></div>
+      <div class="ba-card" onclick="openBALightbox(17)"><img src="transformation18.jpg" alt="Transformation 18"></div>
+      <div class="ba-card" onclick="openBALightbox(18)"><img src="transformation19.jpg" alt="Transformation 19"></div>
+      <div class="ba-card" onclick="openBALightbox(19)"><img src="transformation20.jpg" alt="Transformation 20"></div>
+      <div class="ba-card" onclick="openBALightbox(20)"><img src="transformation21.jpg" alt="Transformation 21"></div>
+      <div class="ba-card" onclick="openBALightbox(21)"><img src="transformation22.jpg" alt="Transformation 22"></div>
+      <div class="ba-card" onclick="openBALightbox(22)"><img src="transformation23.jpg" alt="Transformation 23"></div>
+      <div class="ba-card" onclick="openBALightbox(23)"><img src="transformation24.jpg" alt="Transformation 24"></div>
       <div class="ba-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div>
       <div class="ba-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div>
       <div class="ba-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div>
@@ -472,6 +493,18 @@
       <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
       <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
       <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
+      <div class="ba-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
+      <div class="ba-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
+      <div class="ba-card" onclick="openBALightbox(14)"><img src="transformation15.jpg" alt="Transformation 15"></div>
+      <div class="ba-card" onclick="openBALightbox(15)"><img src="transformation16.jpg" alt="Transformation 16"></div>
+      <div class="ba-card" onclick="openBALightbox(16)"><img src="transformation17.jpg" alt="Transformation 17"></div>
+      <div class="ba-card" onclick="openBALightbox(17)"><img src="transformation18.jpg" alt="Transformation 18"></div>
+      <div class="ba-card" onclick="openBALightbox(18)"><img src="transformation19.jpg" alt="Transformation 19"></div>
+      <div class="ba-card" onclick="openBALightbox(19)"><img src="transformation20.jpg" alt="Transformation 20"></div>
+      <div class="ba-card" onclick="openBALightbox(20)"><img src="transformation21.jpg" alt="Transformation 21"></div>
+      <div class="ba-card" onclick="openBALightbox(21)"><img src="transformation22.jpg" alt="Transformation 22"></div>
+      <div class="ba-card" onclick="openBALightbox(22)"><img src="transformation23.jpg" alt="Transformation 23"></div>
+      <div class="ba-card" onclick="openBALightbox(23)"><img src="transformation24.jpg" alt="Transformation 24"></div>
     </div>
   </div>
 
@@ -488,7 +521,8 @@
     </div>
   </div>
 
-  <div class="testimonials reveal">
+  <div class="testimonials-carousel-wrap reveal">
+  <div class="testimonials" id="testimonialsTrack">
     <div class="testimonial">
       <p class="testimonial-text">"I was training 3-4 nights a week between soccer and Gaelic and seeing zero difference. Since starting with Michael I've lost a serious amount of fat, built a muscular base and I'm performing better on the pitch. He makes the whole journey feel achievable. Couldn't recommend him enough."</p>
       <div class="testimonial-author">Ian</div>
@@ -505,16 +539,38 @@
       <p class="testimonial-text">"10 weeks of online coaching with Michael, down 6kg, lifting heavier than ever, and finally understanding nutrition. I've dropped a clothes size, getting compliments, and most importantly I feel great in myself. Michael has been a brilliant support and has plenty of knowledge. A great kick-start to keep progressing."</p>
       <div class="testimonial-author">Paul</div>
     </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"15.7kg lost since starting. To think I was 20 stone, never stepped foot in a gym, to actually looking forward to going. The confidence has grown massively, I actually like how I look in clothes now and I'm happy in my body. Can't thank you enough for the guidance and it isn't stopping here."</p>
+      <div class="testimonial-author">John D</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"Delighted with the progress I've made despite full-time education, commuting, and long shifts. I feel stronger, my fitness has improved massively, and I feel much more like myself again. You've given me the knowledge and confidence to keep going. Can't recommend you enough."</p>
+      <div class="testimonial-author">Carah F</div>
+    </div>
+  </div>
   </div>
 
   <div class="video-testimonial reveal">
-    <div class="video-wrap" id="videoWrap">
-      <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
-      <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
-        <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+    <div class="video-testimonials-grid">
+      <div class="video-item">
+        <div class="video-wrap" id="videoWrap">
+          <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
+            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <span class="video-expand" id="expandBtn" onclick="expandVideo()">⤢ Expand</span>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap" id="videoWrap2">
+          <video id="testimonialVideo2" src="MRF_Video_Testimonial_Laura.mov" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn2" onclick="toggleVideo2()">
+            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <span class="video-expand" id="expandBtn2" onclick="expandVideo2()">⤢ Expand</span>
       </div>
     </div>
-    <span class="video-expand" id="expandBtn" onclick="expandVideo()">⤢ Expand</span>
   </div>
 
   <div class="transformation-grid-wrap reveal">
@@ -534,6 +590,18 @@
       <div class="transformation-grid-item" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
       <div class="transformation-grid-item" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
       <div class="transformation-grid-item" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(14)"><img src="transformation15.jpg" alt="Transformation 15"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(15)"><img src="transformation16.jpg" alt="Transformation 16"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(16)"><img src="transformation17.jpg" alt="Transformation 17"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(17)"><img src="transformation18.jpg" alt="Transformation 18"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(18)"><img src="transformation19.jpg" alt="Transformation 19"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(19)"><img src="transformation20.jpg" alt="Transformation 20"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(20)"><img src="transformation21.jpg" alt="Transformation 21"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(21)"><img src="transformation22.jpg" alt="Transformation 22"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(22)"><img src="transformation23.jpg" alt="Transformation 23"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(23)"><img src="transformation24.jpg" alt="Transformation 24"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(24)"><img src="transformation25.jpg" alt="Transformation 25"></div>
+      <div class="transformation-grid-item" onclick="openBALightbox(25)"><img src="transformation26.jpg" alt="Transformation 26"></div>
     </div>
   </div>
 </section>
@@ -674,6 +742,26 @@
   document.getElementById('testimonialVideo').addEventListener('ended', function() {
     document.getElementById('playBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
   });
+  function toggleVideo2() {
+    const video = document.getElementById('testimonialVideo2');
+    const btn = document.getElementById('playBtn2');
+    if (video.paused) {
+      video.play();
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+    } else {
+      video.pause();
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
+    }
+  }
+  function expandVideo2() {
+    const wrap = document.getElementById('videoWrap2');
+    const btn = document.getElementById('expandBtn2');
+    if (wrap.classList.contains('expanded')) { wrap.classList.remove('expanded'); btn.textContent = '⤢ Expand'; }
+    else { wrap.classList.add('expanded'); btn.textContent = '⤡ Collapse'; }
+  }
+  document.getElementById('testimonialVideo2').addEventListener('ended', function() {
+    document.getElementById('playBtn2').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
+  });
 
   function toggleMenu() {
     document.getElementById('hamburger').classList.toggle('open');
@@ -725,12 +813,34 @@
   }
 
   const baClients = [
-    { name: 'Client 1' }, { name: 'Client 2' }, { name: 'Client 3' }, { name: 'Client 4' },
-    { name: 'Client 5' }, { name: 'Client 6' }, { name: 'Client 7' }, { name: 'Client 8' },
-    { name: 'Client 9' }, { name: 'Client 10' }, { name: 'Client 11' }, { name: 'Client 12' },
-    { name: 'Client 13' }, { name: 'Client 14' },
+    { name: 'Client 1' },
+    { name: 'Client 2' },
+    { name: 'Client 3' },
+    { name: 'Client 4' },
+    { name: 'Client 5' },
+    { name: 'Client 6' },
+    { name: 'Client 7' },
+    { name: 'Client 8' },
+    { name: 'Client 9' },
+    { name: 'Client 10' },
+    { name: 'Client 11' },
+    { name: 'Client 12' },
+    { name: 'Client 13' },
+    { name: 'Client 14' },
+    { name: 'Client 15' },
+    { name: 'Client 16' },
+    { name: 'Client 17' },
+    { name: 'Client 18' },
+    { name: 'Client 19' },
+    { name: 'Client 20' },
+    { name: 'Client 21' },
+    { name: 'Client 22' },
+    { name: 'Client 23' },
+    { name: 'Client 24' },
+    { name: 'Client 25' },
+    { name: 'Client 26' }
   ];
-  const totalPhotos = 14;
+  const totalPhotos = 26;
   let currentPhoto = 0;
   let touchStartX = 0;
 
@@ -765,6 +875,33 @@
     if (Math.abs(diff) > 50) { if (diff > 0) nextPhoto(); else prevPhoto(); }
   });
   document.getElementById('baLightbox').addEventListener('click', function(e) { if (e.target === this) closeBALightbox(); });
+
+  // Testimonials swipe carousel
+  const track = document.getElementById('testimonialsTrack');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    track.classList.add('dragging');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    track.scrollLeft = scrollLeft - walk;
+  });
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX - track.offsetLeft; scrollLeft = track.scrollLeft; }, { passive: true });
+  track.addEventListener('touchmove', (e) => {
+    const x = e.touches[0].pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  }, { passive: true });
 </script>
 
 </body>
