@@ -852,7 +852,8 @@
     document.body.style.overflow = 'hidden';
   }
   function updateLightbox() {
-    document.getElementById('baLbImg').src = `transformation${currentPhoto + 1}.jpg`;
+    const ext = currentPhoto + 1 >= 15 ? 'JPG' : 'jpg';
+    document.getElementById('baLbImg').src = `transformation${currentPhoto + 1}.${ext}`;
     document.getElementById('baLbCounter').textContent = `${currentPhoto + 1} / ${totalPhotos}`;
     document.getElementById('baLbName').textContent = baClients[currentPhoto].name;
   }
