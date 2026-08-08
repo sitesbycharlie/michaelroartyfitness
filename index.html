@@ -27,6 +27,14 @@
     gtag('js', new Date());
     gtag('config', 'G-PRS5K4SV5K');
   </script>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PRS5K4SV5K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PRS5K4SV5K');
+  </script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
@@ -202,18 +210,10 @@
     .ba-lightbox-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); letter-spacing: 0.1em; }
 
     /* TESTIMONIALS */
-    .testimonials-carousel-wrap { max-width: 1200px; margin: 0 auto; overflow: hidden; position: relative; }
-    .testimonials-carousel-wrap::before, .testimonials-carousel-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
-    .testimonials-carousel-wrap::before { left: 0; background: linear-gradient(to right, var(--dark), transparent); }
-    .testimonials-carousel-wrap::after { right: 0; background: linear-gradient(to left, var(--dark), transparent); }
-    .testimonials { display: flex; gap: 1.5rem; width: max-content; animation: testimonialsScroll 30s linear infinite; }
-    .testimonials:hover { animation-play-state: paused; }
-    .testimonials.dragging { animation-play-state: paused; cursor: grabbing; }
-    @keyframes testimonialsScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .testimonial { scroll-snap-align: start; flex: 0 0 320px; cursor: grab; }
-    .testimonial { padding: 2rem; background: var(--mid); border-left: 2px solid rgba(201,168,76,0.3); transition: border-color 0.3s; flex: 0 0 300px; min-width: 300px; display: flex; flex-direction: column; justify-content: space-between; }
+    .testimonials { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .testimonial { padding: 2rem; background: var(--mid); border-left: 2px solid rgba(201,168,76,0.3); transition: border-color 0.3s; }
     .testimonial:hover { border-color: var(--gold); }
-    .testimonial-text { font-size: 0.9rem; line-height: 1.7; color: rgba(245,245,240,0.7); margin-bottom: 1.5rem; font-style: italic; flex: 1; }
+    .testimonial-text { font-size: 0.95rem; line-height: 1.7; color: rgba(245,245,240,0.7); margin-bottom: 1.5rem; font-style: italic; }
     .testimonial-stars, .testimonial-detail { display: none; }
     .testimonial-author { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
 
@@ -233,10 +233,10 @@
     .transformation-grid-wrap { margin-top: 5rem; }
     .transformation-grid-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 0.05em; margin-bottom: 2.5rem; text-align: center; }
     .transformation-grid-title span { color: var(--gold); }
-    .transformation-grid { display: none; }
-    
-    
-    
+    .transformation-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.6rem; }
+    .transformation-grid-item { aspect-ratio: 1 / 1; overflow: hidden; cursor: pointer; position: relative; }
+    .transformation-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+    .transformation-grid-item:hover img { transform: scale(1.04); }
 
     /* HOW IT WORKS */
     #how-it-works { background: var(--black); }
@@ -285,8 +285,8 @@
     .nav-star-btn:hover { color: var(--black) !important; }
 
     /* MOBILE */
-    
-    
+    @media (max-width: 1024px) { .testimonials { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px) { .transformation-grid { grid-template-columns: repeat(4, 1fr); } }
     @media (max-width: 768px) {
       nav { position: relative; }
       .nav-links { display: none; }
@@ -309,7 +309,7 @@
       .ba-carousel-wrap::before, .ba-carousel-wrap::after { width: 40px; }
       .ba-lightbox-arrow { display: none; }
       .ba-lightbox { padding: 1rem; }
-      .testimonial { min-width: calc(100vw - 4rem); }
+      .testimonials { grid-template-columns: 1fr; gap: 1.5rem; }
       .testimonial { padding: 1.5rem; }
       .testimonial-text { font-size: 0.9rem; }
       .video-wrap { width: 100%; }
@@ -319,7 +319,7 @@
       .hiw-step-num { margin: 0 auto 0.8rem; }
       .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
       .form-row { grid-template-columns: 1fr; }
-      
+      .transformation-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
       footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 2rem 5%; }
       .footer-copy { font-size: 0.75rem; }
       section { padding: 4rem 5%; }
@@ -333,27 +333,44 @@
       section { overflow-x: hidden; }
     }
 
-    .video-carousel-wrap { max-width: 700px; margin: 0 auto; overflow: hidden; position: relative; }
-    .video-testimonials-grid { display: flex; gap: 2rem; width: max-content; transition: transform 0.4s ease; }
-    .video-item { flex: 0 0 300px; display: flex; flex-direction: column; align-items: center; }
-    .video-item .video-wrap { border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; width: 100%; }
-    .video-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
-    .video-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(201,168,76,0.3); border: none; cursor: pointer; transition: background 0.2s; padding: 0; }
-    .video-dot.active { background: var(--gold); }
-    .video-name { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); margin-top: 0.5rem; }
+    /* TESTIMONIALS AUTO-SCROLL */
+    .testimonials-carousel-wrap { width: 100%; margin: 3rem 0 0; overflow: hidden; position: relative; }
+    .testimonials-carousel-wrap::before, .testimonials-carousel-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
+    .testimonials-carousel-wrap::before { left: 0; background: linear-gradient(to right, var(--dark), transparent); }
+    .testimonials-carousel-wrap::after { right: 0; background: linear-gradient(to left, var(--dark), transparent); }
+    .testimonials { display: flex; gap: 1.5rem; width: max-content; animation: testimonialsScroll 40s linear infinite; }
+    .testimonials:hover { animation-play-state: paused; }
+    @keyframes testimonialsScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .testimonial { flex: 0 0 300px; padding: 2rem; background: var(--mid); border-left: 2px solid rgba(201,168,76,0.3); transition: border-color 0.3s; display: flex; flex-direction: column; }
+    .testimonial:hover { border-color: var(--gold); }
+    .testimonial-text { font-size: 0.88rem; line-height: 1.7; color: rgba(245,245,240,0.7); margin-bottom: 1.2rem; font-style: italic; flex: 1; }
+    .testimonial-author { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
+    .testimonial-stars, .testimonial-detail { display: none; }
 
-    .transformation-grid-wrap { margin-top: 5rem; overflow: hidden; }
-    .tri-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; width: max-content; }
+    /* VIDEO PAIR */
+    .video-testimonial { margin: 0 auto 3rem; text-align: center; padding: 0 5%; }
+    .video-pair { display: flex; gap: 2rem; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+    .video-item { display: flex; flex-direction: column; align-items: center; }
+    .video-item .video-wrap { border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; width: 260px; }
+    @media (max-width: 600px) { .video-pair { flex-direction: column; align-items: center; } .video-item .video-wrap { width: 100%; max-width: 300px; } }
+
+    /* THREE-ROW CAROUSEL */
+    .transformation-grid-wrap { margin-top: 4rem; overflow: hidden; }
+    .tri-row-wrap { overflow: hidden; width: 100%; margin-bottom: 0.5rem; }
+    .tri-row { display: flex; gap: 0.5rem; width: max-content; }
     .tri-row-1 { animation: triScroll1 40s linear infinite; }
     .tri-row-2 { animation: triScroll2 45s linear infinite; }
     .tri-row-3 { animation: triScroll3 38s linear infinite; }
     @keyframes triScroll1 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     @keyframes triScroll2 { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
     @keyframes triScroll3 { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .tri-card { flex-shrink: 0; width: 200px; height: 200px; overflow: hidden; cursor: pointer; border-radius: 4px; }
-    .tri-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+    .tri-card { flex-shrink: 0; width: 180px; height: 180px; overflow: hidden; cursor: pointer; border-radius: 4px; }
+    .tri-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
     .tri-card:hover img { transform: scale(1.05); }
-    @media (max-width: 768px) { .tri-card { width: 140px; height: 140px; } }
+    @media (max-width: 768px) { .tri-card { width: 120px; height: 120px; } }
+
+    /* MOBILE OVERFLOW */
+    @media (max-width: 768px) { html, body { overflow-x: hidden; max-width: 100vw; } section { overflow-x: hidden; } }
   </style>
 </head>
 <body>
@@ -490,18 +507,6 @@
       <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
       <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
       <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
-      <div class="ba-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
-      <div class="ba-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
-      <div class="ba-card" onclick="openBALightbox(14)"><img src="transformation15.JPG" alt="Transformation 15"></div>
-      <div class="ba-card" onclick="openBALightbox(15)"><img src="transformation16.JPG" alt="Transformation 16"></div>
-      <div class="ba-card" onclick="openBALightbox(16)"><img src="transformation17.JPG" alt="Transformation 17"></div>
-      <div class="ba-card" onclick="openBALightbox(17)"><img src="transformation18.JPG" alt="Transformation 18"></div>
-      <div class="ba-card" onclick="openBALightbox(18)"><img src="transformation19.JPG" alt="Transformation 19"></div>
-      <div class="ba-card" onclick="openBALightbox(19)"><img src="transformation20.JPG" alt="Transformation 20"></div>
-      <div class="ba-card" onclick="openBALightbox(20)"><img src="transformation21.JPG" alt="Transformation 21"></div>
-      <div class="ba-card" onclick="openBALightbox(21)"><img src="transformation22.JPG" alt="Transformation 22"></div>
-      <div class="ba-card" onclick="openBALightbox(22)"><img src="transformation23.JPG" alt="Transformation 23"></div>
-      <div class="ba-card" onclick="openBALightbox(23)"><img src="transformation24.JPG" alt="Transformation 24"></div>
       <div class="ba-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div>
       <div class="ba-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div>
       <div class="ba-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div>
@@ -514,18 +519,6 @@
       <div class="ba-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div>
       <div class="ba-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div>
       <div class="ba-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div>
-      <div class="ba-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div>
-      <div class="ba-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div>
-      <div class="ba-card" onclick="openBALightbox(14)"><img src="transformation15.JPG" alt="Transformation 15"></div>
-      <div class="ba-card" onclick="openBALightbox(15)"><img src="transformation16.JPG" alt="Transformation 16"></div>
-      <div class="ba-card" onclick="openBALightbox(16)"><img src="transformation17.JPG" alt="Transformation 17"></div>
-      <div class="ba-card" onclick="openBALightbox(17)"><img src="transformation18.JPG" alt="Transformation 18"></div>
-      <div class="ba-card" onclick="openBALightbox(18)"><img src="transformation19.JPG" alt="Transformation 19"></div>
-      <div class="ba-card" onclick="openBALightbox(19)"><img src="transformation20.JPG" alt="Transformation 20"></div>
-      <div class="ba-card" onclick="openBALightbox(20)"><img src="transformation21.JPG" alt="Transformation 21"></div>
-      <div class="ba-card" onclick="openBALightbox(21)"><img src="transformation22.JPG" alt="Transformation 22"></div>
-      <div class="ba-card" onclick="openBALightbox(22)"><img src="transformation23.JPG" alt="Transformation 23"></div>
-      <div class="ba-card" onclick="openBALightbox(23)"><img src="transformation24.JPG" alt="Transformation 24"></div>
     </div>
   </div>
 
@@ -542,11 +535,31 @@
     </div>
   </div>
 
+  <div class="video-testimonial reveal">
+    <div class="video-pair">
+      <div class="video-item">
+        <div class="video-wrap" id="videoWrap">
+          <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
+            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <span class="video-expand" id="expandBtn" onclick="expandVideo()">&#x2922; Expand</span>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap" id="videoWrap2">
+          <video id="testimonialVideo2" src="MRF_Video_Testimonial_Laura.MOV" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn2" onclick="toggleVideo2()">
+            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <span class="video-expand" id="expandBtn2" onclick="expandVideo2()">&#x2922; Expand</span>
+      </div>
+    </div>
+  </div>
+
   <div class="testimonials-carousel-wrap reveal">
-  <div class="testimonials" id="testimonialsTrack">
-    <div class="testimonial">
-      <p class="testimonial-text">"I was training 3-4 nights a week between soccer and Gaelic and seeing zero difference. Since starting with Michael I've lost a serious amount of fat, built a muscular base and I'm performing better on the pitch. He makes the whole journey feel achievable. Couldn't recommend him enough."</p>
-      <div class="testimonial-author">Ian
+    <div class="testimonials" id="testimonialsTrack">
     <div class="testimonial">
       <p class="testimonial-text">"I was training 3-4 nights a week between soccer and Gaelic and seeing zero difference. Since starting with Michael I've lost a serious amount of fat, built a muscular base and I'm performing better on the pitch. He makes the whole journey feel achievable. Couldn't recommend him enough."</p>
       <div class="testimonial-author">Ian</div>
@@ -571,43 +584,38 @@
       <p class="testimonial-text">"Delighted with the progress I've made despite full-time education, commuting, and long shifts. I feel stronger, my fitness has improved massively, and I feel much more like myself again. You've given me the knowledge and confidence to keep going. Can't recommend you enough."</p>
       <div class="testimonial-author">Carah F</div>
     </div>
-  </div>
-  </div>
-
-  <div class="video-testimonial reveal">
-    <div class="video-carousel-wrap" id="videoCarouselWrap">
-      <div class="video-testimonials-grid" id="videoTrack">
-        <div class="video-item">
-          <div class="video-wrap" id="videoWrap">
-            <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
-            <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
-              <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <span class="video-expand" id="expandBtn" onclick="expandVideo()">⤢ Expand</span>
-        </div>
-        <div class="video-item">
-          <div class="video-wrap" id="videoWrap2">
-            <video id="testimonialVideo2" src="MRF_Video_Testimonial_Laura.MOV" playsinline preload="metadata"></video>
-            <div class="video-play-btn" id="playBtn2" onclick="toggleVideo2()">
-              <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <span class="video-expand" id="expandBtn2" onclick="expandVideo2()">⤢ Expand</span>
-        </div>
-      </div>
-      <div class="video-dots">
-        <button class="video-dot active" onclick="goToVideo(0)"></button>
-        <button class="video-dot" onclick="goToVideo(1)"></button>
-      </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"I was training 3-4 nights a week between soccer and Gaelic and seeing zero difference. Since starting with Michael I've lost a serious amount of fat, built a muscular base and I'm performing better on the pitch. He makes the whole journey feel achievable. Couldn't recommend him enough."</p>
+      <div class="testimonial-author">Ian</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"When I first started the gym I felt completely lost, same exercises, no progress, no direction. Michael gave me a proper plan, built my confidence and taught me correct form. The results speak for themselves. Best decision I've made for my fitness."</p>
+      <div class="testimonial-author">Darragh</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"I was going to the gym 2-3 times a week and getting nowhere. Since starting with Michael I've been losing fat and gaining strength at the same time. My diet has completely changed too, I didn't realise how much of an impact that would have. If you're on the fence, just give it a try."</p>
+      <div class="testimonial-author">Christopher</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"10 weeks of online coaching with Michael, down 6kg, lifting heavier than ever, and finally understanding nutrition. I've dropped a clothes size, getting compliments, and most importantly I feel great in myself. Michael has been a brilliant support and has plenty of knowledge. A great kick-start to keep progressing."</p>
+      <div class="testimonial-author">Paul</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"15.7kg lost since starting. To think I was 20 stone, never stepped foot in a gym, to actually looking forward to going. The confidence has grown massively, I actually like how I look in clothes now and I'm happy in my body. Can't thank you enough for the guidance and it isn't stopping here."</p>
+      <div class="testimonial-author">John D</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"Delighted with the progress I've made despite full-time education, commuting, and long shifts. I feel stronger, my fitness has improved massively, and I feel much more like myself again. You've given me the knowledge and confidence to keep going. Can't recommend you enough."</p>
+      <div class="testimonial-author">Carah F</div>
+    </div>
     </div>
   </div>
 
   <div class="transformation-grid-wrap reveal">
     <h3 class="transformation-grid-title"><span>TRANSFORMATIONS</span></h3>
-    <div class="tri-row tri-row-1"><div class="tri-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div><div class="tri-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div><div class="tri-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div><div class="tri-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"></div><div class="tri-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"></div><div class="tri-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"></div><div class="tri-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"></div><div class="tri-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"></div><div class="tri-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"></div><div class="tri-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div><div class="tri-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div><div class="tri-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div><div class="tri-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"></div><div class="tri-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"></div><div class="tri-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"></div><div class="tri-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"></div><div class="tri-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"></div><div class="tri-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"></div></div>
-    <div class="tri-row tri-row-2"><div class="tri-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div><div class="tri-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div><div class="tri-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div><div class="tri-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div><div class="tri-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div><div class="tri-card" onclick="openBALightbox(14)"><img src="transformation15.JPG" alt="Transformation 15"></div><div class="tri-card" onclick="openBALightbox(15)"><img src="transformation16.JPG" alt="Transformation 16"></div><div class="tri-card" onclick="openBALightbox(16)"><img src="transformation17.JPG" alt="Transformation 17"></div><div class="tri-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div><div class="tri-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div><div class="tri-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div><div class="tri-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div><div class="tri-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div><div class="tri-card" onclick="openBALightbox(14)"><img src="transformation15.JPG" alt="Transformation 15"></div><div class="tri-card" onclick="openBALightbox(15)"><img src="transformation16.JPG" alt="Transformation 16"></div><div class="tri-card" onclick="openBALightbox(16)"><img src="transformation17.JPG" alt="Transformation 17"></div></div>
-    <div class="tri-row tri-row-3"><div class="tri-card" onclick="openBALightbox(17)"><img src="transformation18.JPG" alt="Transformation 18"></div><div class="tri-card" onclick="openBALightbox(18)"><img src="transformation19.JPG" alt="Transformation 19"></div><div class="tri-card" onclick="openBALightbox(19)"><img src="transformation20.JPG" alt="Transformation 20"></div><div class="tri-card" onclick="openBALightbox(20)"><img src="transformation21.JPG" alt="Transformation 21"></div><div class="tri-card" onclick="openBALightbox(21)"><img src="transformation22.JPG" alt="Transformation 22"></div><div class="tri-card" onclick="openBALightbox(22)"><img src="transformation23.JPG" alt="Transformation 23"></div><div class="tri-card" onclick="openBALightbox(23)"><img src="transformation24.JPG" alt="Transformation 24"></div><div class="tri-card" onclick="openBALightbox(24)"><img src="transformation25.JPG" alt="Transformation 25"></div><div class="tri-card" onclick="openBALightbox(25)"><img src="transformation26.JPG" alt="Transformation 26"></div><div class="tri-card" onclick="openBALightbox(17)"><img src="transformation18.JPG" alt="Transformation 18"></div><div class="tri-card" onclick="openBALightbox(18)"><img src="transformation19.JPG" alt="Transformation 19"></div><div class="tri-card" onclick="openBALightbox(19)"><img src="transformation20.JPG" alt="Transformation 20"></div><div class="tri-card" onclick="openBALightbox(20)"><img src="transformation21.JPG" alt="Transformation 21"></div><div class="tri-card" onclick="openBALightbox(21)"><img src="transformation22.JPG" alt="Transformation 22"></div><div class="tri-card" onclick="openBALightbox(22)"><img src="transformation23.JPG" alt="Transformation 23"></div><div class="tri-card" onclick="openBALightbox(23)"><img src="transformation24.JPG" alt="Transformation 24"></div><div class="tri-card" onclick="openBALightbox(24)"><img src="transformation25.JPG" alt="Transformation 25"></div><div class="tri-card" onclick="openBALightbox(25)"><img src="transformation26.JPG" alt="Transformation 26"></div></div>
+    <div class="tri-row-wrap"><div class="tri-row tri-row-1"><div class="tri-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div><div class="tri-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div><div class="tri-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div><div class="tri-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"></div><div class="tri-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"></div><div class="tri-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"></div><div class="tri-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"></div><div class="tri-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"></div><div class="tri-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"></div><div class="tri-card" onclick="openBALightbox(0)"><img src="transformation1.jpg" alt="Transformation 1"></div><div class="tri-card" onclick="openBALightbox(1)"><img src="transformation2.jpg" alt="Transformation 2"></div><div class="tri-card" onclick="openBALightbox(2)"><img src="transformation3.jpg" alt="Transformation 3"></div><div class="tri-card" onclick="openBALightbox(3)"><img src="transformation4.jpg" alt="Transformation 4"></div><div class="tri-card" onclick="openBALightbox(4)"><img src="transformation5.jpg" alt="Transformation 5"></div><div class="tri-card" onclick="openBALightbox(5)"><img src="transformation6.jpg" alt="Transformation 6"></div><div class="tri-card" onclick="openBALightbox(6)"><img src="transformation7.jpg" alt="Transformation 7"></div><div class="tri-card" onclick="openBALightbox(7)"><img src="transformation8.jpg" alt="Transformation 8"></div><div class="tri-card" onclick="openBALightbox(8)"><img src="transformation9.jpg" alt="Transformation 9"></div></div></div>
+    <div class="tri-row-wrap"><div class="tri-row tri-row-2"><div class="tri-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div><div class="tri-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div><div class="tri-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div><div class="tri-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div><div class="tri-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div><div class="tri-card" onclick="openBALightbox(14)"><img src="transformation15.JPG" alt="Transformation 15"></div><div class="tri-card" onclick="openBALightbox(15)"><img src="transformation16.JPG" alt="Transformation 16"></div><div class="tri-card" onclick="openBALightbox(16)"><img src="transformation17.JPG" alt="Transformation 17"></div><div class="tri-card" onclick="openBALightbox(9)"><img src="transformation10.jpg" alt="Transformation 10"></div><div class="tri-card" onclick="openBALightbox(10)"><img src="transformation11.jpg" alt="Transformation 11"></div><div class="tri-card" onclick="openBALightbox(11)"><img src="transformation12.jpg" alt="Transformation 12"></div><div class="tri-card" onclick="openBALightbox(12)"><img src="transformation13.jpg" alt="Transformation 13"></div><div class="tri-card" onclick="openBALightbox(13)"><img src="transformation14.jpg" alt="Transformation 14"></div><div class="tri-card" onclick="openBALightbox(14)"><img src="transformation15.JPG" alt="Transformation 15"></div><div class="tri-card" onclick="openBALightbox(15)"><img src="transformation16.JPG" alt="Transformation 16"></div><div class="tri-card" onclick="openBALightbox(16)"><img src="transformation17.JPG" alt="Transformation 17"></div></div></div>
+    <div class="tri-row-wrap"><div class="tri-row tri-row-3"><div class="tri-card" onclick="openBALightbox(17)"><img src="transformation18.JPG" alt="Transformation 18"></div><div class="tri-card" onclick="openBALightbox(18)"><img src="transformation19.JPG" alt="Transformation 19"></div><div class="tri-card" onclick="openBALightbox(19)"><img src="transformation20.JPG" alt="Transformation 20"></div><div class="tri-card" onclick="openBALightbox(20)"><img src="transformation21.JPG" alt="Transformation 21"></div><div class="tri-card" onclick="openBALightbox(21)"><img src="transformation22.JPG" alt="Transformation 22"></div><div class="tri-card" onclick="openBALightbox(22)"><img src="transformation23.JPG" alt="Transformation 23"></div><div class="tri-card" onclick="openBALightbox(23)"><img src="transformation24.JPG" alt="Transformation 24"></div><div class="tri-card" onclick="openBALightbox(24)"><img src="transformation25.JPG" alt="Transformation 25"></div><div class="tri-card" onclick="openBALightbox(25)"><img src="transformation26.JPG" alt="Transformation 26"></div><div class="tri-card" onclick="openBALightbox(17)"><img src="transformation18.JPG" alt="Transformation 18"></div><div class="tri-card" onclick="openBALightbox(18)"><img src="transformation19.JPG" alt="Transformation 19"></div><div class="tri-card" onclick="openBALightbox(19)"><img src="transformation20.JPG" alt="Transformation 20"></div><div class="tri-card" onclick="openBALightbox(20)"><img src="transformation21.JPG" alt="Transformation 21"></div><div class="tri-card" onclick="openBALightbox(21)"><img src="transformation22.JPG" alt="Transformation 22"></div><div class="tri-card" onclick="openBALightbox(22)"><img src="transformation23.JPG" alt="Transformation 23"></div><div class="tri-card" onclick="openBALightbox(23)"><img src="transformation24.JPG" alt="Transformation 24"></div><div class="tri-card" onclick="openBALightbox(24)"><img src="transformation25.JPG" alt="Transformation 25"></div><div class="tri-card" onclick="openBALightbox(25)"><img src="transformation26.JPG" alt="Transformation 26"></div></div></div>
   </div>
 </section>
 
@@ -748,21 +756,14 @@
     document.getElementById('playBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
   });
   function toggleVideo2() {
-    const video = document.getElementById('testimonialVideo2');
-    const btn = document.getElementById('playBtn2');
-    if (video.paused) {
-      video.play();
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
-    } else {
-      video.pause();
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
-    }
+    const v = document.getElementById('testimonialVideo2'), b = document.getElementById('playBtn2');
+    if (v.paused) { v.play(); b.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'; }
+    else { v.pause(); b.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>'; }
   }
   function expandVideo2() {
-    const wrap = document.getElementById('videoWrap2');
-    const btn = document.getElementById('expandBtn2');
-    if (wrap.classList.contains('expanded')) { wrap.classList.remove('expanded'); btn.textContent = '⤢ Expand'; }
-    else { wrap.classList.add('expanded'); btn.textContent = '⤡ Collapse'; }
+    const w = document.getElementById('videoWrap2'), b = document.getElementById('expandBtn2');
+    if (w.classList.contains('expanded')) { w.classList.remove('expanded'); b.textContent = '⤢ Expand'; }
+    else { w.classList.add('expanded'); b.textContent = '⧁ Collapse'; }
   }
   document.getElementById('testimonialVideo2').addEventListener('ended', function() {
     document.getElementById('playBtn2').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
@@ -818,32 +819,10 @@
   }
 
   const baClients = [
-    { name: 'Client 1' },
-    { name: 'Client 2' },
-    { name: 'Client 3' },
-    { name: 'Client 4' },
-    { name: 'Client 5' },
-    { name: 'Client 6' },
-    { name: 'Client 7' },
-    { name: 'Client 8' },
-    { name: 'Client 9' },
-    { name: 'Client 10' },
-    { name: 'Client 11' },
-    { name: 'Client 12' },
-    { name: 'Client 13' },
-    { name: 'Client 14' },
-    { name: 'Client 15' },
-    { name: 'Client 16' },
-    { name: 'Client 17' },
-    { name: 'Client 18' },
-    { name: 'Client 19' },
-    { name: 'Client 20' },
-    { name: 'Client 21' },
-    { name: 'Client 22' },
-    { name: 'Client 23' },
-    { name: 'Client 24' },
-    { name: 'Client 25' },
-    { name: 'Client 26' }
+    { name: 'Client 1' }, { name: 'Client 2' }, { name: 'Client 3' }, { name: 'Client 4' },
+    { name: 'Client 5' }, { name: 'Client 6' }, { name: 'Client 7' }, { name: 'Client 8' },
+    { name: 'Client 9' }, { name: 'Client 10' }, { name: 'Client 11' }, { name: 'Client 12' },
+    { name: 'Client 13' }, { name: 'Client 14' },
   ];
   const totalPhotos = 26;
   let currentPhoto = 0;
@@ -881,50 +860,6 @@
     if (Math.abs(diff) > 50) { if (diff > 0) nextPhoto(); else prevPhoto(); }
   });
   document.getElementById('baLightbox').addEventListener('click', function(e) { if (e.target === this) closeBALightbox(); });
-
-  // Testimonials swipe carousel
-  const track = document.getElementById('testimonialsTrack');
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  track.addEventListener('mousedown', (e) => {
-    isDown = true;
-    track.classList.add('dragging');
-    startX = e.pageX - track.offsetLeft;
-    scrollLeft = track.scrollLeft;
-  });
-  track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
-  track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
-  track.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    track.scrollLeft = scrollLeft - walk;
-  });
-  track.addEventListener('touchstart', (e) => { startX = e.touches[0].pageX - track.offsetLeft; scrollLeft = track.scrollLeft; }, { passive: true });
-  track.addEventListener('touchmove', (e) => {
-    const x = e.touches[0].pageX - track.offsetLeft;
-    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
-  }, { passive: true });
-
-  // Video carousel
-  let currentVideoIndex = 0;
-  const videoTrack = document.getElementById('videoTrack');
-  const videoDots = document.querySelectorAll('.video-dot');
-  function goToVideo(index) {
-    currentVideoIndex = index;
-    videoTrack.style.transform = `translateX(calc(-${index} * (300px + 2rem)))`;
-    videoDots.forEach((d, i) => d.classList.toggle('active', i === index));
-  }
-  // Touch swipe for video carousel
-  let vTouchStart = 0;
-  document.getElementById('videoCarouselWrap').addEventListener('touchstart', e => { vTouchStart = e.touches[0].clientX; }, { passive: true });
-  document.getElementById('videoCarouselWrap').addEventListener('touchend', e => {
-    const diff = vTouchStart - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) { goToVideo(diff > 0 ? 1 : 0); }
-  });
 </script>
 
 </body>
