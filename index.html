@@ -335,11 +335,11 @@
     }
 
     /* TESTIMONIALS AUTO-SCROLL */
-    .testimonials-carousel-wrap { width: 100%; margin: 3rem 0 0; overflow: hidden; position: relative; }
+    .testimonials-carousel-wrap { width: 100%; margin: 3rem 0 0; overflow: hidden; position: relative; cursor: grab; }
     .testimonials-carousel-wrap::before, .testimonials-carousel-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
     .testimonials-carousel-wrap::before { left: 0; background: linear-gradient(to right, var(--dark), transparent); }
     .testimonials-carousel-wrap::after { right: 0; background: linear-gradient(to left, var(--dark), transparent); }
-    .testimonials { display: flex; gap: 1.5rem; width: max-content; animation: testimonialsScroll 40s linear infinite; }
+    .testimonials { display: flex; gap: 1.5rem; width: max-content; animation: testimonialsScroll 20s linear infinite; cursor: grab; }
     .testimonials:hover { animation-play-state: paused; }
     @keyframes testimonialsScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .testimonial { flex: 0 0 300px; padding: 2rem; background: var(--mid); border-left: 2px solid rgba(201,168,76,0.3); transition: border-color 0.3s; display: flex; flex-direction: column; }
@@ -766,6 +766,74 @@
     if (w.classList.contains('expanded')) { w.classList.remove('expanded'); b.textContent = '⤢ Expand'; }
     else { w.classList.add('expanded'); b.textContent = '⧁ Collapse'; }
   }
+  // Testimonials touch swipe
+  (function() {
+    const wrap = document.querySelector('.testimonials-carousel-wrap');
+    const track = document.getElementById('testimonialsTrack');
+    let startX = 0, isDragging = false, pausedAt = 0;
+    function getOffset() {
+      const style = getComputedStyle(track);
+      const matrix = new DOMMatrix(style.transform);
+      return matrix.m41;
+    }
+    wrap.addEventListener('touchstart', e => {
+      track.style.animationPlayState = 'paused';
+      pausedAt = getOffset();
+      track.style.animation = 'none';
+      track.style.transform = `translateX(${pausedAt}px)`;
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+    wrap.addEventListener('touchmove', e => {
+      const dx = e.touches[0].clientX - startX;
+      track.style.transform = `translateX(${pausedAt + dx}px)`;
+    }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      pausedAt = pausedAt + dx;
+      const halfWidth = track.scrollWidth / 2;
+      if (pausedAt < -halfWidth) pausedAt += halfWidth;
+      if (pausedAt > 0) pausedAt -= halfWidth;
+      track.style.transform = `translateX(${pausedAt}px)`;
+      setTimeout(() => {
+        track.style.animation = '';
+        track.style.transform = '';
+      }, 1500);
+    }, { passive: true });
+    wrap.addEventListener('mousedown', e => { isDragging = true; pausedAt = getOffset(); track.style.animation = 'none'; track.style.transform = `translateX(${pausedAt}px)`; startX = e.clientX; });
+    window.addEventListener('mousemove', e => { if (!isDragging) return; track.style.transform = `translateX(${pausedAt + e.clientX - startX}px)`; });
+    window.addEventListener('mouseup', e => { if (!isDragging) return; isDragging = false; pausedAt = pausedAt + (e.clientX - startX); setTimeout(() => { track.style.animation = ''; track.style.transform = ''; }, 1500); });
+  })();
+
+  // Transformation rows touch swipe — pause on touch, resume on release
+  document.querySelectorAll('.tri-row-wrap').forEach(wrap => {
+    const row = wrap.querySelector('.tri-row');
+    let tStart = 0, paused = false, offset = 0;
+    function getRowOffset() {
+      const m = new DOMMatrix(getComputedStyle(row).transform);
+      return m.m41;
+    }
+    wrap.addEventListener('touchstart', e => {
+      offset = getRowOffset();
+      row.style.animationPlayState = 'paused';
+      row.style.animation = 'none';
+      row.style.transform = `translateX(${offset}px)`;
+      tStart = e.touches[0].clientX;
+      paused = true;
+    }, { passive: true });
+    wrap.addEventListener('touchmove', e => {
+      if (!paused) return;
+      const dx = e.touches[0].clientX - tStart;
+      row.style.transform = `translateX(${offset + dx}px)`;
+    }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      if (!paused) return;
+      const dx = e.changedTouches[0].clientX - tStart;
+      offset = offset + dx;
+      row.style.transform = `translateX(${offset}px)`;
+      setTimeout(() => { row.style.animation = ''; row.style.transform = ''; paused = false; }, 2000);
+    }, { passive: true });
+  });
+
   document.getElementById('testimonialVideo2').addEventListener('ended', function() {
     document.getElementById('playBtn2').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
   });
@@ -847,6 +915,36 @@
   function closeBALightbox() {
     document.getElementById('baLightbox').classList.remove('active');
     document.getElementById('baCarouselWrap').classList.remove('paused');
+
+  // Main photo carousel touch swipe
+  (function() {
+    const wrap = document.getElementById('baCarouselWrap');
+    const track = document.getElementById('baCarouselTrack');
+    let startX = 0, offset = 0, dragging = false;
+    function getOffset() {
+      return new DOMMatrix(getComputedStyle(track).transform).m41;
+    }
+    wrap.addEventListener('touchstart', e => {
+      if (document.getElementById('baLightbox').classList.contains('active')) return;
+      offset = getOffset();
+      track.style.animationPlayState = 'paused';
+      track.style.animation = 'none';
+      track.style.transform = `translateX(${offset}px)`;
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+    wrap.addEventListener('touchmove', e => {
+      const dx = e.touches[0].clientX - startX;
+      track.style.transform = `translateX(${offset + dx}px)`;
+    }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      offset = offset + (e.changedTouches[0].clientX - startX);
+      const half = track.scrollWidth / 2;
+      if (offset < -half) offset += half;
+      if (offset > 0) offset -= half;
+      track.style.transform = `translateX(${offset}px)`;
+      setTimeout(() => { track.style.animation = ''; track.style.transform = ''; }, 2000);
+    }, { passive: true });
+  })();
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', function(e) {
