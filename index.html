@@ -352,8 +352,13 @@
     .video-testimonial { margin: 0 auto 3rem; text-align: center; padding: 0 5%; }
     .video-pair { display: flex; gap: 2rem; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
     .video-item { display: flex; flex-direction: column; align-items: center; }
-    .video-item .video-wrap { border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; width: 260px; }
-    @media (max-width: 600px) { .video-pair { flex-direction: column; align-items: center; } .video-item .video-wrap { width: 100%; max-width: 300px; } }
+    .video-item .video-wrap { border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; width: 260px; max-width: 100%; }
+    @media (max-width: 768px) {
+      .video-pair { flex-direction: row; gap: 0.75rem; justify-content: center; align-items: flex-start; flex-wrap: nowrap; }
+      .video-item .video-wrap { width: calc(50vw - 1.5rem); max-width: 200px; border-radius: 6px; }
+      .video-expand { font-size: 0.6rem; }
+      .video-testimonial { padding: 0 0.75rem; }
+    }
 
     /* THREE-ROW CAROUSEL */
     .transformation-grid-wrap { margin-top: 4rem; overflow: hidden; }
@@ -766,42 +771,74 @@
     if (w.classList.contains('expanded')) { w.classList.remove('expanded'); b.textContent = '⤢ Expand'; }
     else { w.classList.add('expanded'); b.textContent = '⧁ Collapse'; }
   }
-  // Testimonials touch swipe
+  // Testimonials touch swipe — fluid with 2s resume
   (function() {
     const wrap = document.querySelector('.testimonials-carousel-wrap');
     const track = document.getElementById('testimonialsTrack');
-    let startX = 0, isDragging = false, pausedAt = 0;
-    function getOffset() {
-      const style = getComputedStyle(track);
-      const matrix = new DOMMatrix(style.transform);
-      return matrix.m41;
-    }
-    wrap.addEventListener('touchstart', e => {
-      track.style.animationPlayState = 'paused';
-      pausedAt = getOffset();
+    let startX = 0, offset = 0, resumeTimer = null, vel = 0, lastX = 0, lastTime = 0;
+
+    function getOffset() { return new DOMMatrix(getComputedStyle(track).transform).m41; }
+
+    function pauseCarousel() {
+      clearTimeout(resumeTimer);
+      offset = getOffset();
       track.style.animation = 'none';
-      track.style.transform = `translateX(${pausedAt}px)`;
+      track.style.transform = `translateX(${offset}px)`;
+    }
+
+    function resumeCarousel() {
+      resumeTimer = setTimeout(() => {
+        const half = track.scrollWidth / 2;
+        if (offset < -half) offset += half;
+        if (offset > 0) offset -= half;
+        track.style.transition = 'transform 0.3s ease';
+        track.style.transform = `translateX(${offset}px)`;
+        setTimeout(() => {
+          track.style.transition = '';
+          track.style.animation = '';
+          track.style.transform = '';
+        }, 300);
+      }, 2000);
+    }
+
+    // Touch
+    wrap.addEventListener('touchstart', e => {
+      pauseCarousel();
       startX = e.touches[0].clientX;
+      lastX = startX; lastTime = Date.now();
+      vel = 0;
     }, { passive: true });
     wrap.addEventListener('touchmove', e => {
-      const dx = e.touches[0].clientX - startX;
-      track.style.transform = `translateX(${pausedAt + dx}px)`;
+      const x = e.touches[0].clientX;
+      const now = Date.now();
+      vel = (x - lastX) / (now - lastTime + 1) * 16;
+      lastX = x; lastTime = now;
+      track.style.transform = `translateX(${offset + (x - startX)}px)`;
     }, { passive: true });
     wrap.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].clientX - startX;
-      pausedAt = pausedAt + dx;
-      const halfWidth = track.scrollWidth / 2;
-      if (pausedAt < -halfWidth) pausedAt += halfWidth;
-      if (pausedAt > 0) pausedAt -= halfWidth;
-      track.style.transform = `translateX(${pausedAt}px)`;
-      setTimeout(() => {
-        track.style.animation = '';
-        track.style.transform = '';
-      }, 1500);
+      offset = offset + (e.changedTouches[0].clientX - startX) + vel * 4;
+      track.style.transform = `translateX(${offset}px)`;
+      resumeCarousel();
     }, { passive: true });
-    wrap.addEventListener('mousedown', e => { isDragging = true; pausedAt = getOffset(); track.style.animation = 'none'; track.style.transform = `translateX(${pausedAt}px)`; startX = e.clientX; });
-    window.addEventListener('mousemove', e => { if (!isDragging) return; track.style.transform = `translateX(${pausedAt + e.clientX - startX}px)`; });
-    window.addEventListener('mouseup', e => { if (!isDragging) return; isDragging = false; pausedAt = pausedAt + (e.clientX - startX); setTimeout(() => { track.style.animation = ''; track.style.transform = ''; }, 1500); });
+
+    // Mouse (desktop)
+    let mouseDown = false;
+    wrap.addEventListener('mousedown', e => { mouseDown = true; pauseCarousel(); startX = e.clientX; lastX = startX; lastTime = Date.now(); vel = 0; wrap.style.cursor = 'grabbing'; });
+    window.addEventListener('mousemove', e => {
+      if (!mouseDown) return;
+      const now = Date.now(); vel = (e.clientX - lastX) / (now - lastTime + 1) * 16; lastX = e.clientX; lastTime = now;
+      track.style.transform = `translateX(${offset + (e.clientX - startX)}px)`;
+    });
+    window.addEventListener('mouseup', e => {
+      if (!mouseDown) return; mouseDown = false; wrap.style.cursor = 'grab';
+      offset = offset + (e.clientX - startX) + vel * 4;
+      track.style.transform = `translateX(${offset}px)`;
+      resumeCarousel();
+    });
+
+    // Pause on hover (desktop)
+    wrap.addEventListener('mouseenter', () => { if (!mouseDown) track.style.animationPlayState = 'paused'; });
+    wrap.addEventListener('mouseleave', () => { if (!mouseDown) track.style.animationPlayState = 'running'; });
   })();
 
   // Transformation rows touch swipe — pause on touch, resume on release
