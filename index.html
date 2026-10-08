@@ -348,16 +348,17 @@
     .testimonial-author { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
     .testimonial-stars, .testimonial-detail { display: none; }
 
-    /* VIDEO PAIR */
+    /* VIDEO ROW */
     .video-testimonial { margin: 0 auto 3rem; text-align: center; padding: 0 5%; }
-    .video-pair { display: flex; gap: 2rem; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+    .video-pair { display: flex; gap: 1.75rem; justify-content: center; align-items: flex-start; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
     .video-item { display: flex; flex-direction: column; align-items: center; }
-    .video-item .video-wrap { border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; width: 260px; max-width: 100%; }
+    .video-item .video-wrap { border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; width: 200px; max-width: 100%; }
     @media (max-width: 768px) {
-      .video-pair { flex-direction: row; gap: 0.75rem; justify-content: center; align-items: flex-start; flex-wrap: nowrap; }
-      .video-item .video-wrap { width: calc(50vw - 1.5rem); max-width: 200px; border-radius: 6px; }
+      .video-pair { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; gap: 0.9rem; padding: 0 5% 0.5rem; margin: 0 -5%; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+      .video-item { flex: 0 0 auto; scroll-snap-align: start; }
+      .video-item .video-wrap { width: 42vw; max-width: 190px; border-radius: 6px; }
       .video-expand { font-size: 0.6rem; }
-      .video-testimonial { padding: 0 0.75rem; }
+      .video-testimonial { padding: 0; }
     }
 
     /* THREE-ROW CAROUSEL */
@@ -544,28 +545,67 @@
   <div class="video-testimonial reveal">
     <div class="video-pair">
       <div class="video-item">
-        <div class="video-wrap" id="videoWrap">
-          <video id="testimonialVideo" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
-          <div class="video-play-btn" id="playBtn" onclick="toggleVideo()">
+        <div class="video-wrap" id="videoWrap1">
+          <video id="testimonialVideo1" src="MRF_Video_Testimonial.mp4" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn1" onclick="toggleVideo(1)">
             <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
-        <span class="video-expand" id="expandBtn" onclick="expandVideo()">&#x2922; Expand</span>
+        <span class="video-expand" id="expandBtn1" onclick="expandVideo(1)">&#x2922; Expand</span>
       </div>
       <div class="video-item">
         <div class="video-wrap" id="videoWrap2">
           <video id="testimonialVideo2" src="MRF_Video_Testimonial_Laura.MOV" playsinline preload="metadata"></video>
-          <div class="video-play-btn" id="playBtn2" onclick="toggleVideo2()">
+          <div class="video-play-btn" id="playBtn2" onclick="toggleVideo(2)">
             <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
           </div>
         </div>
-        <span class="video-expand" id="expandBtn2" onclick="expandVideo2()">&#x2922; Expand</span>
+        <span class="video-expand" id="expandBtn2" onclick="expandVideo(2)">&#x2922; Expand</span>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap" id="videoWrap3">
+          <video id="testimonialVideo3" src="MRF_Video_Testimonial3.MOV" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn3" onclick="toggleVideo(3)">
+            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <span class="video-expand" id="expandBtn3" onclick="expandVideo(3)">&#x2922; Expand</span>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap" id="videoWrap4">
+          <video id="testimonialVideo4" src="MRF_Video_Testimonial4.MOV" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn4" onclick="toggleVideo(4)">
+            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <span class="video-expand" id="expandBtn4" onclick="expandVideo(4)">&#x2922; Expand</span>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap" id="videoWrap5">
+          <video id="testimonialVideo5" src="MRF_Video_Testimonial5.MOV" playsinline preload="metadata"></video>
+          <div class="video-play-btn" id="playBtn5" onclick="toggleVideo(5)">
+            <svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <span class="video-expand" id="expandBtn5" onclick="expandVideo(5)">&#x2922; Expand</span>
       </div>
     </div>
   </div>
 
   <div class="testimonials-carousel-wrap reveal">
     <div class="testimonials" id="testimonialsTrack">
+    <div class="testimonial">
+      <p class="testimonial-text">"Came onboard to lower the weight on the scales while keeping a healthy diet, and I'm down just over 10kg in 3 months and still dropping. I haven't been this weight since 2018, having peaked at 120kg during COVID. It's made a real difference on the football field carrying around less weight."</p>
+      <div class="testimonial-author">Darragh G</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"I've really enjoyed working with Michael and the results we've achieved together are next level. Prior to working together I couldn't imagine being where I am now at the age I am. He's a really excellent coach and every chance I get I tell people to go work with him."</p>
+      <div class="testimonial-author">Laura McC</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"My experience with Michael was nothing short of life changing. My lifestyle was a mess, unhealthy diet, zero motivation. He completely changed my outlook on food, training and gym life, and the weekly check-ins kept me accountable to my plan. I'm now the lowest weight I've been in years and in the best shape of my life."</p>
+      <div class="testimonial-author">Jordan</div>
+    </div>
     <div class="testimonial">
       <p class="testimonial-text">"I was training 3-4 nights a week between soccer and Gaelic and seeing zero difference. Since starting with Michael I've lost a serious amount of fat, built a muscular base and I'm performing better on the pitch. He makes the whole journey feel achievable. Couldn't recommend him enough."</p>
       <div class="testimonial-author">Ian</div>
@@ -589,6 +629,18 @@
     <div class="testimonial">
       <p class="testimonial-text">"Delighted with the progress I've made despite full-time education, commuting, and long shifts. I feel stronger, my fitness has improved massively, and I feel much more like myself again. You've given me the knowledge and confidence to keep going. Can't recommend you enough."</p>
       <div class="testimonial-author">Carah F</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"Came onboard to lower the weight on the scales while keeping a healthy diet, and I'm down just over 10kg in 3 months and still dropping. I haven't been this weight since 2018, having peaked at 120kg during COVID. It's made a real difference on the football field carrying around less weight."</p>
+      <div class="testimonial-author">Darragh G</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"I've really enjoyed working with Michael and the results we've achieved together are next level. Prior to working together I couldn't imagine being where I am now at the age I am. He's a really excellent coach and every chance I get I tell people to go work with him."</p>
+      <div class="testimonial-author">Laura McC</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"My experience with Michael was nothing short of life changing. My lifestyle was a mess, unhealthy diet, zero motivation. He completely changed my outlook on food, training and gym life, and the weekly check-ins kept me accountable to my plan. I'm now the lowest weight I've been in years and in the best shape of my life."</p>
+      <div class="testimonial-author">Jordan</div>
     </div>
     <div class="testimonial">
       <p class="testimonial-text">"I was training 3-4 nights a week between soccer and Gaelic and seeing zero difference. Since starting with Michael I've lost a serious amount of fat, built a muscular base and I'm performing better on the pitch. He makes the whole journey feel achievable. Couldn't recommend him enough."</p>
@@ -741,9 +793,9 @@
 </footer>
 
 <script>
-  function toggleVideo() {
-    const video = document.getElementById('testimonialVideo');
-    const btn = document.getElementById('playBtn');
+  function toggleVideo(n) {
+    const video = document.getElementById('testimonialVideo' + n);
+    const btn = document.getElementById('playBtn' + n);
     if (video.paused) {
       video.play();
       btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
@@ -752,24 +804,16 @@
       btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
     }
   }
-  function expandVideo() {
-    const wrap = document.getElementById('videoWrap');
-    const btn = document.getElementById('expandBtn');
+  function expandVideo(n) {
+    const wrap = document.getElementById('videoWrap' + n);
+    const btn = document.getElementById('expandBtn' + n);
     if (wrap.classList.contains('expanded')) { wrap.classList.remove('expanded'); btn.textContent = '⤢ Expand'; }
     else { wrap.classList.add('expanded'); btn.textContent = '⤡ Collapse'; }
   }
-  document.getElementById('testimonialVideo').addEventListener('ended', function() {
-    document.getElementById('playBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
-  });
-  function toggleVideo2() {
-    const v = document.getElementById('testimonialVideo2'), b = document.getElementById('playBtn2');
-    if (v.paused) { v.play(); b.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'; }
-    else { v.pause(); b.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>'; }
-  }
-  function expandVideo2() {
-    const w = document.getElementById('videoWrap2'), b = document.getElementById('expandBtn2');
-    if (w.classList.contains('expanded')) { w.classList.remove('expanded'); b.textContent = '⤢ Expand'; }
-    else { w.classList.add('expanded'); b.textContent = '⧁ Collapse'; }
+  for (let n = 1; n <= 5; n++) {
+    document.getElementById('testimonialVideo' + n).addEventListener('ended', function() {
+      document.getElementById('playBtn' + n).innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
+    });
   }
   // Testimonials touch swipe — fluid with 2s resume
   (function() {
