@@ -227,7 +227,14 @@
     .video-play-btn:hover svg { transform: scale(1.1); }
     .video-expand { display: inline-block; margin-top: 0.6rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; transition: color 0.2s; }
     .video-expand:hover { color: var(--gold); }
-    .video-wrap.expanded { width: 100%; max-width: 800px; }
+
+    /* VIDEO FULLSCREEN OVERLAY */
+    .video-fs-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 9999; align-items: center; justify-content: center; padding: 2rem 1rem; }
+    .video-fs-overlay.active { display: flex; }
+    .video-fs-inner { max-width: 100%; max-height: 100%; }
+    .video-fs-inner video { max-width: 100%; max-height: 88vh; display: block; margin: 0 auto; border-radius: 6px; }
+    .video-fs-close { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; padding: 0.5rem; z-index: 2; }
+    @media (max-width: 768px) { .video-fs-overlay { padding: 0; } .video-fs-inner video { max-height: 100vh; border-radius: 0; } .video-fs-close { top: 0.6rem; right: 0.6rem; } }
 
     /* TRANSFORMATION GRID */
     .transformation-grid-wrap { margin-top: 5rem; }
@@ -637,6 +644,11 @@
     </div>
   </div>
 
+  <div class="video-fs-overlay" id="videoFsOverlay">
+    <button class="video-fs-close" onclick="closeFullscreenVideo()">&#10005;</button>
+    <div class="video-fs-inner" id="videoFsInner"></div>
+  </div>
+
   <div class="testimonials-carousel-wrap reveal">
     <div class="testimonials" id="testimonialsTrack">
     <div class="testimonial">
@@ -851,12 +863,38 @@
       btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
     }
   }
+  let fsVideoId = null, fsOriginalParent = null, fsOriginalNext = null;
   function expandVideo(n) {
-    const wrap = document.getElementById('videoWrap' + n);
-    const btn = document.getElementById('expandBtn' + n);
-    if (wrap.classList.contains('expanded')) { wrap.classList.remove('expanded'); btn.textContent = '⤢ Expand'; }
-    else { wrap.classList.add('expanded'); btn.textContent = '⤡ Collapse'; }
+    const video = document.getElementById('testimonialVideo' + n);
+    const overlay = document.getElementById('videoFsOverlay');
+    const inner = document.getElementById('videoFsInner');
+    fsVideoId = n;
+    fsOriginalParent = video.parentElement;
+    fsOriginalNext = video.nextElementSibling;
+    inner.appendChild(video);
+    video.setAttribute('controls', 'true');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    video.play();
   }
+  function closeFullscreenVideo() {
+    if (fsVideoId === null) return;
+    const video = document.getElementById('testimonialVideo' + fsVideoId);
+    const overlay = document.getElementById('videoFsOverlay');
+    video.pause();
+    video.removeAttribute('controls');
+    if (fsOriginalNext) fsOriginalParent.insertBefore(video, fsOriginalNext);
+    else fsOriginalParent.appendChild(video);
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    fsVideoId = null;
+  }
+  document.getElementById('videoFsOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeFullscreenVideo();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeFullscreenVideo();
+  });
   for (let n = 1; n <= 5; n++) {
     document.getElementById('testimonialVideo' + n).addEventListener('ended', function() {
       document.getElementById('playBtn' + n).innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
