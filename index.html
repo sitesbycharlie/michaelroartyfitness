@@ -376,7 +376,7 @@
       width: clamp(92px, 17vw, 200px); max-width: 100%;
       animation: videoGlow 2.6s ease-in-out infinite;
     }
-    .video-item .video-wrap.played { animation: none; border-color: rgba(245,245,240,0.15); box-shadow: none; }
+    .video-item .video-wrap.in-fs { animation: none; border-color: rgba(245,245,240,0.15); box-shadow: none; }
     .video-item:nth-child(1) .video-wrap { --glow-color: var(--gold); animation-delay: 0s; }
     .video-item:nth-child(2) .video-wrap { --glow-color: var(--blue); animation-delay: 0.3s; }
     .video-item:nth-child(3) .video-wrap { --glow-color: var(--gold); animation-delay: 0.6s; }
@@ -852,20 +852,12 @@
 <script>
   function toggleVideo(n) {
     const video = document.getElementById('testimonialVideo' + n);
-    const btn = document.getElementById('playBtn' + n);
-    const wrap = document.getElementById('videoWrap' + n);
-    if (video.paused) {
-      video.play();
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
-      wrap.classList.add('played');
-    } else {
-      video.pause();
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
-    }
+    if (video.paused) { video.play(); } else { video.pause(); }
   }
   let fsVideoId = null, fsOriginalParent = null, fsOriginalNext = null;
   function expandVideo(n) {
     const video = document.getElementById('testimonialVideo' + n);
+    const wrap = document.getElementById('videoWrap' + n);
     const overlay = document.getElementById('videoFsOverlay');
     const inner = document.getElementById('videoFsInner');
     fsVideoId = n;
@@ -875,11 +867,13 @@
     video.setAttribute('controls', 'true');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    wrap.classList.add('in-fs');
     video.play();
   }
   function closeFullscreenVideo() {
     if (fsVideoId === null) return;
     const video = document.getElementById('testimonialVideo' + fsVideoId);
+    const wrap = document.getElementById('videoWrap' + fsVideoId);
     const overlay = document.getElementById('videoFsOverlay');
     video.pause();
     video.removeAttribute('controls');
@@ -887,6 +881,7 @@
     else fsOriginalParent.appendChild(video);
     overlay.classList.remove('active');
     document.body.style.overflow = '';
+    wrap.classList.remove('in-fs');
     fsVideoId = null;
   }
   document.getElementById('videoFsOverlay').addEventListener('click', function(e) {
@@ -895,9 +890,26 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeFullscreenVideo();
   });
+  const PAUSE_ICON = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+  const PLAY_ICON = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
   for (let n = 1; n <= 5; n++) {
-    document.getElementById('testimonialVideo' + n).addEventListener('ended', function() {
-      document.getElementById('playBtn' + n).innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="36" height="36"><path d="M8 5v14l11-7z"/></svg>';
+    const video = document.getElementById('testimonialVideo' + n);
+    const btn = document.getElementById('playBtn' + n);
+    const wrap = document.getElementById('videoWrap' + n);
+    video.addEventListener('play', function() {
+      for (let m = 1; m <= 5; m++) {
+        if (m !== n) {
+          const other = document.getElementById('testimonialVideo' + m);
+          if (!other.paused) other.pause();
+        }
+      }
+      btn.innerHTML = PAUSE_ICON;
+    });
+    video.addEventListener('pause', function() {
+      btn.innerHTML = PLAY_ICON;
+    });
+    video.addEventListener('ended', function() {
+      btn.innerHTML = PLAY_ICON;
     });
   }
   // Testimonials touch swipe — fluid with 2s resume
