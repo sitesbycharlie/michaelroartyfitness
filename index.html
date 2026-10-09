@@ -152,6 +152,7 @@
     .about-text .section-title span { color: var(--blue-light); }
     .about-body { color: rgba(245,245,240,0.65); line-height: 1.8; margin-bottom: 1.5rem; text-align: left; }
     .about-quals { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; justify-content: center; }
+    .about-body-mobile { display: none; }
     .qual-tag {
       font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase; padding: 0.45rem 1rem;
@@ -308,6 +309,11 @@
       .hero-sub { font-size: 0.9rem; margin-bottom: 1.5rem; }
       .star-btn { width: 100%; text-align: center; padding: 1rem; }
       .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .about-body-desktop { display: none; }
+      .about-body-mobile { display: block; font-size: 0.88rem; line-height: 1.65; margin-bottom: 1.2rem; }
+      .about-quals { gap: 0.45rem; margin-bottom: 1.5rem; }
+      .qual-tag { font-size: 0.65rem; padding: 0.35rem 0.6rem; }
+      #about { padding-top: 2.8rem; padding-bottom: 2.8rem; }
       .section-title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
       .services-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5px; align-items: stretch; }
       .service-card { padding: 0.85rem 0.75rem; display: flex; flex-direction: column; }
@@ -325,11 +331,14 @@
       .testimonial { padding: 1.5rem; }
       .testimonial-text { font-size: 0.9rem; }
       .video-wrap { width: 100%; }
-      .hiw-steps { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hiw-steps { grid-template-columns: 1fr; gap: 1.1rem; margin-top: 1.8rem; }
       .hiw-steps::before { display: none; }
-      .hiw-step { text-align: center; padding: 0; }
-      .hiw-step-desc { max-width: 280px; margin: 0 auto; }
-      .hiw-step-num { margin: 0 auto 0.8rem; }
+      .hiw-step { display: flex; flex-direction: column; text-align: left; padding: 0; }
+      .hiw-step-top { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.35rem; }
+      .hiw-step-num { width: 2.3rem; height: 2.3rem; font-size: 0.95rem; margin: 0; flex-shrink: 0; }
+      .hiw-step-title { font-size: 0.82rem; margin-bottom: 0; }
+      .hiw-step-desc { max-width: none; margin: 0 0 0 calc(2.3rem + 0.8rem); font-size: 0.78rem; line-height: 1.5; }
+      #how-it-works { padding: 2.8rem 5%; }
       .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
       .form-row { grid-template-columns: 1fr; }
       .transformation-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
@@ -476,9 +485,10 @@
   <div class="about-inner">
     <div class="about-text">
       <h2 class="section-title">MORE THAN A<br><span>TRAINER.</span></h2>
-      <p class="about-body">I'm Michael Roarty, a certified personal trainer and fitness instructor based in County Donegal, Ireland. Before getting into coaching, I lost 30kg myself. That journey changed everything. I fell in love with the gym, with nutrition, and with the structure and routine that comes with committing to a goal. That experience gave me something no qualification could, I know exactly what it takes, because I've lived it.</p>
-      <p class="about-body">Since then, I've made it my mission to help others do the same. Whether you want to lose fat, build muscle, get stronger, or simply become a healthier version of yourself, for you, or for the people who matter most to you, I'll build a plan around your life and walk every step of the journey with you.</p>
-      <p class="about-body">I offer fully personalised online coaching covering fat loss, muscle building, strength, and gaining phases to help you add size and improve your physique. I also offer in-person 1-1 coaching, or bring a friend for a 2-1 session.</p>
+      <p class="about-body about-body-desktop">I'm Michael Roarty, a certified personal trainer and fitness instructor based in County Donegal, Ireland. Before getting into coaching, I lost 30kg myself. That journey changed everything. I fell in love with the gym, with nutrition, and with the structure and routine that comes with committing to a goal. That experience gave me something no qualification could, I know exactly what it takes, because I've lived it.</p>
+      <p class="about-body about-body-desktop">Since then, I've made it my mission to help others do the same. Whether you want to lose fat, build muscle, get stronger, or simply become a healthier version of yourself, for you, or for the people who matter most to you, I'll build a plan around your life and walk every step of the journey with you.</p>
+      <p class="about-body about-body-desktop">I offer fully personalised online coaching covering fat loss, muscle building, strength, and gaining phases to help you add size and improve your physique. I also offer in-person 1-1 coaching, or bring a friend for a 2-1 session.</p>
+      <p class="about-body about-body-mobile">I'm Michael Roarty, a certified personal trainer based in County Donegal. I lost 30kg myself, so I know exactly what it takes, because I've lived it. Now I help others do the same with fully personalised online coaching, or in-person 1-1 and 2-1 sessions, covering fat loss, muscle building, and strength.</p>
       <div class="about-quals">
         <span class="qual-tag">Certified Personal Trainer</span>
         <span class="qual-tag">Certified Fitness Instructor</span>
@@ -739,18 +749,15 @@
     <h2 class="section-title">HOW IT<br><span style="color:var(--blue)">WORKS.</span></h2>
     <div class="hiw-steps">
       <div class="hiw-step">
-        <div class="hiw-step-num">01</div>
-        <div class="hiw-step-title">Fill Out the Form</div>
+        <div class="hiw-step-top"><div class="hiw-step-num">01</div><div class="hiw-step-title">Fill Out the Form</div></div>
         <p class="hiw-step-desc">Tell Michael a bit about yourself, your goals, and what you're looking for. Takes less than 2 minutes.</p>
       </div>
       <div class="hiw-step">
-        <div class="hiw-step-num">02</div>
-        <div class="hiw-step-title">Free Consultation</div>
+        <div class="hiw-step-top"><div class="hiw-step-num">02</div><div class="hiw-step-title">Free Consultation</div></div>
         <p class="hiw-step-desc">Michael will reach out to arrange a free call, no pressure, no commitment. Just a conversation about what's possible.</p>
       </div>
       <div class="hiw-step">
-        <div class="hiw-step-num">03</div>
-        <div class="hiw-step-title">Start Your Programme</div>
+        <div class="hiw-step-top"><div class="hiw-step-num">03</div><div class="hiw-step-title">Start Your Programme</div></div>
         <p class="hiw-step-desc">Your fully personalised plan is built and you begin. From day one, Michael is in your corner every step of the way.</p>
       </div>
     </div>
